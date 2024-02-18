@@ -1,0 +1,127 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* navigation tab adj */
+nav{
+    height:80px;
+    background: #b60303;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem calc(100vw - 1300px) / 2;
+}
+
+
+/* logo gas adj */
+.logo{ 
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0 2rem;
+}
+
+/* navigation text adj */
+nav a {
+    text-decoration: none;
+    color: #000000;
+    padding: 0 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition:0.4s;
+}
+
+nav a:hover{
+    color: #ffffff;
+    transition: 0.4s;
+}
+
+nav a.active {
+    color: #ffffff; /* Set the color to white */
+}
+
+/* bg */
+.hero{
+    background: #c90303;
+    width:100%;
+    height:100vh;
+    background-image: linear-gradient(rgba(123, 90, 90, 0.85), rgba(173, 144, 144, 0.85)), url(../img/gasStation.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Quote */
+.quote-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff6d;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+#quoteForm {
+    display: grid;
+    gap: 15px;
+}
+
+.hero h2 {
+    text-align: center;
+    margin-top: 100px; /* Increase margin */
+    color: #000000; /* Set the color to your preference */
+    font-size: 2.5em; /* Set the font size */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #b60303;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a20202;
+}
+
+/* Styles for the quote results */
+#quoteResults {
+    margin-top: 20px;
+}
+
+#quoteResults label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+#quoteResults span {
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+#submitBtn {
+    margin-top: 20px;
+}
