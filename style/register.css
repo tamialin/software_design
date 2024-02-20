@@ -1,0 +1,37 @@
+.register-email{
+   display: block;
+}
+
+.enter-pass{
+   display: block;
+   align-items: center;
+}
+.enter-pass input{
+   border: 0;
+}
+.enter-pass img{
+   width: 20px;
+   cursor: pointer;
+}
+
+.re-enter-pass{
+   display: block;
+   align-items: center;
+}
+.re-enter-pass input{
+   border: 0;
+}
+.re-enter-pass img{
+   width: 20px;
+   cursor: pointer;
+}
+
+.enter-info button{
+   cursor: pointer;
+}
+
+.required::after{
+   content: " *";
+   color: red;
+   font-size: 15px;
+}

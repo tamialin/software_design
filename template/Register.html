@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+
+   </head>
+   <body>
+      <section id="register-block">
+         <h3>Create Your Account</h3>
+         <label class="required">Email</label>
+         <input class="register-email" type="Text" placeholder="Email">
+         
+         <label class="required">Password</label>
+         <div class="enter-pass">
+            <input type="password" placeholder="Password" id="password">
+            <img src="../img/eye-icons/eye-close.png" id="eyeicon">
+         </div>
+
+         <label class="required">Re-enter Password</label>
+         <div class="re-enter-pass">
+            <input type="password" placeholder="Re-enter password" id="re-password">
+            <img src="../img/eye-icons/eye-close.png" id="re-eyeicon">
+         </div>
+
+         <button id="register-button">Register</button>
+      </section>
+
+      <section id="login-block" style="display: none;">
+         <p class="register-mess">
+            Register Successfully! Please Login to Manage Your Profile.
+         </p>
+
+         <button type="button" onclick="location.href='Login.html'" id="login-button">
+            Login
+         </button>
+      </section>
+
+      <!-- script for hidden/un-hidden password -->
+      <script>
+         let eyeicon = document.getElementById("eyeicon");
+         let password = document.getElementById("password");
+
+         let reicon = document.getElementById("re-eyeicon");
+         let repassword = document.getElementById("re-password");
+
+         eyeicon.onclick = function()
+         {
+            if (password.type == "password")
+            {
+               password.type = "text";
+               eyeicon.src = "../img/eye-icons/eye-open.png";
+            }
+            else
+            {
+               password.type = "password";
+               eyeicon.src = "../img/eye-icons/eye-close.png";
+            }
+         }
+
+         reicon.onclick = function()
+         {
+            if (repassword.type == "password")
+            {
+               repassword.type = "text";
+               reicon.src = "./eye-icons/eye-open.png";
+            }
+            else
+            {
+               repassword.type = "password";
+               reicon.src = "./eye-icons/eye-close.png";
+            }
+         }
+      </script>
+
+      <!--script for post-register-->
+      <script>
+         let registerButton = document.getElementById("register-button");
+         let registerBlock = document.getElementById("register-block");
+         let loginBlock = document.getElementById("login-block");
+
+         registerButton.onclick = function()
+         {
+            registerBlock.style.display = 'none';
+            loginBlock.style.display = 'block';
+         }
+      </script>
+   </body>
+</html>
