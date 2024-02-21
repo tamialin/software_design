@@ -1,30 +1,50 @@
 <!DOCTYPE html>
 <html>
    <head>
-
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FUEL QUOTE</title>
+      <link rel="stylesheet" href="../style/register.css"/>
    </head>
    <body>
-      <section id="register-block">
+      <nav>
+         <div class="logo"> FUEL QUOTE </div>
+         <div class="nav-items">
+             <a href="./home.html">Home</a>
+             <a href="./about.html">About</a>
+             <a href="./Login.html">Login</a>
+         </div>
+     </nav>
+      <section class="register-block" id="register-block">
          <h3>Create Your Account</h3>
-         <label class="required">Email</label>
-         <input class="register-email" type="Text" placeholder="Email">
-         
-         <label class="required">Password</label>
-         <div class="enter-pass">
-            <input type="password" placeholder="Password" id="password">
-            <img src="../img/eye-icons/eye-close.png" id="eyeicon">
+
+         <div class="input-box">
+            <label class="required">Email</label>
+            <input class="register-email" type="Text" placeholder="Email">
          </div>
 
-         <label class="required">Re-enter Password</label>
-         <div class="re-enter-pass">
-            <input type="password" placeholder="Re-enter password" id="re-password">
-            <img src="../img/eye-icons/eye-close.png" id="re-eyeicon">
+         <div class="input-box">
+            <label class="required">Password</label>
+            <div class="enter-pass">
+               <input type="password" placeholder="Password" id="password">
+               <img src="../img/eye-icons/eye-close.png" id="eyeicon">
+            </div>
          </div>
 
-         <button id="register-button">Register</button>
+         <div class="input-box">
+            <label class="required">Re-enter Password</label>
+            <div class="re-enter-pass">
+               <input type="password" placeholder="Re-enter password" id="re-password">
+               <img src="../img/eye-icons/eye-close.png" id="re-eyeicon">
+            </div>
+         </div>
+
+         <div class="register-button">
+            <button id="register-button">Register</button>
+         </div>
       </section>
 
-      <section id="login-block" style="display: none;">
+      <section class="login-block" id="login-block" style="display: none;">
          <p class="register-mess">
             Register Successfully! Please Login to Manage Your Profile.
          </p>
@@ -61,12 +81,12 @@
             if (repassword.type == "password")
             {
                repassword.type = "text";
-               reicon.src = "./eye-icons/eye-open.png";
+               reicon.src = "../img/eye-icons/eye-open.png";
             }
             else
             {
                repassword.type = "password";
-               reicon.src = "./eye-icons/eye-close.png";
+               reicon.src = "../img/eye-icons/eye-close.png";
             }
          }
       </script>
