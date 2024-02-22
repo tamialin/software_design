@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUEL QUOTE</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="../style/profile.css"/>
 </head>
 <body>
@@ -26,12 +26,12 @@
          </p>
          <div class="input-box">
             <label class="required">Full Name</label>
-            <input type="text" placeholder="Full Name">
+            <input type="text" placeholder="Full Name" required>
          </div>
 
          <div class="input-box">
             <label class="required">Address 1</label>
-            <input type="Text" placeholder="Address 1">
+            <input type="Text" placeholder="Address 1" required>
          </div>
    
          <div class="input-box">
@@ -41,14 +41,14 @@
 
          <div class="input-box">
             <label class="required">City</label>
-            <input type="text" placeholder="City">
+            <input type="text" placeholder="City" required>
          </div>
 
          <div class="input-box">
             <label class="required">State</label>
             <button>
                <div class="dropdown-options">
-                  <select name="states" id="states">
+                  <select name="states" id="states" required>
                      <option value="AL">Alabama</option>
                      <option value="AK">Alaska</option>
                      <option value="AZ">Arizona</option>
@@ -107,12 +107,31 @@
 
          <div class="input-box">
             <label class="required">Zipcode</label>
-            <input type="text" placeholder="Zipcode">
+            <input type="text" placeholder="Zipcode" required>
          </div>
          
          <div class="update-button">
-            <button>Update Profile</button>
+            <button type="button" onclick="updateProfile()">Update Profile</button>
          </div>
       </section>
+
+      <script>
+         function updateProfile()
+         {
+            // Trigger validation
+            let requiredFields = document.querySelectorAll('[required]');
+
+            for (let field of requiredFields) {
+            if (!field.checkValidity()) {
+               field.reportValidity();
+               return;
+               }
+            }
+
+            alert("Profile Updated!");
+         }
+
+      </script>
+
    </body>
 </html>
