@@ -23,13 +23,13 @@
       <div class="login-box">
          <h1>Welcome</h1>
          <div class="input-box">
-            <input class="user-name" type="text" placeholder="Username">
+            <input class="user-name" type="text" placeholder="Username" id="username" required>
          </div>
          <div class="input-box">
-            <input class="password" type="password" placeholder="Password" id="myPassword">
+            <input class="password" type="password" placeholder="Password" id="myPassword" required>
             <img src="../img/eye-icons/eye-close.png" id="eyeicon" style="width: 20px;">
          </div>
-         <button class="login-button">
+         <button type="button" class="login-button" onclick="verifyLogin()">
             Login
          </button>
          <a class="register" href="Register.html">
@@ -54,6 +54,20 @@
             myPassword.type = "password"
             eyeicon.src = "../img/eye-icons/eye-close.png";
          }
+      }
+
+      function verifyLogin() {
+         // Trigger validation
+         let requiredFields = document.querySelectorAll('[required]');
+
+         for (let field of requiredFields) {
+         if (!field.checkValidity()) {
+            field.reportValidity();
+            return;
+            }
+         }
+         // Perform login logic if validation passes
+         alert("Login successful!");
       }
    </script>
 </body>

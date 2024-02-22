@@ -23,13 +23,13 @@
 
          <div class="input-box">
             <label class="required">Email</label>
-            <input class="register-email" type="Text" placeholder="Email">
+            <input class="register-email" type="Text" placeholder="Email" required>
          </div>
 
          <div class="input-box">
             <label class="required">Password</label>
             <div class="enter-pass">
-               <input type="password" placeholder="Password" id="password">
+               <input type="password" placeholder="Password" id="password" required>
                <img src="../img/eye-icons/eye-close.png" id="eyeicon">
             </div>
          </div>
@@ -37,7 +37,7 @@
          <div class="input-box">
             <label class="required">Re-enter Password</label>
             <div class="re-enter-pass">
-               <input type="password" placeholder="Re-enter password" id="re-password">
+               <input type="password" placeholder="Re-enter password" id="re-password" required>
                <img src="../img/eye-icons/eye-close.png" id="re-eyeicon">
             </div>
          </div>
@@ -102,6 +102,22 @@
 
          registerButton.onclick = function()
          {
+            let requiredFields = document.querySelectorAll('[required]');
+            let password = document.getElementById('password').value;
+            let reenterPassword = document.getElementById('re-password').value;
+
+            for (let field of requiredFields) {
+            if (!field.checkValidity()) {
+               field.reportValidity();
+               return;
+               }
+            }
+
+            if (password !== reenterPassword) {
+               alert("Password and Re-enter Password must be the same");
+               return;
+            }
+
             registerBlock.style.display = 'none';
             loginBlock.style.display = 'block';
          }
