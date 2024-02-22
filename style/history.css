@@ -54,3 +54,19 @@ nav a.active {
     background-size: cover;
     background-position: center;
 }
+
+.previous-table{
+    width: 90%; /* Adjust the width as needed */
+    margin: 30px auto; /* Center the table */
+    border-collapse: collapse;
+}
+
+.previous-table th, .previous-table td {
+    padding: 20px; /* Increase padding for more spacing */
+    text-align: center; /* Center align text */
+    border-bottom: 1px solid #ddd;
+}
+
+.previous-table th {
+    background-color: #FFDEAD;
+}
