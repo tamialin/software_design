@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../style/register.css"/>
+</head>
+<body>
+   <nav>
+        <div class="logo"> FUEL QUOTE </div>
+        <div class="nav-items">
+         <a href="./home.html">Home</a>
+         <a href="./about.html">About</a>
+         <a href="./quote.html">Quote</a>
+         <a href="./history.html">History</a>
+         <a href="./ProfileManage.html">Profile</a>
+         <a href="./Login.html" class="active">Login</a>
+        </div>
+   </nav>
+      <section class="register-block" id="register-block">
+         <h3>Create Your Account</h3>
+
+         <div class="input-box">
+            <label class="required">Email</label>
+            <input class="register-email" type="Text" placeholder="Email">
+         </div>
+
+         <div class="input-box">
+            <label class="required">Password</label>
+            <div class="enter-pass">
+               <input type="password" placeholder="Password" id="password">
+               <img src="../img/eye-icons/eye-close.png" id="eyeicon">
+            </div>
+         </div>
+
+         <div class="input-box">
+            <label class="required">Re-enter Password</label>
+            <div class="re-enter-pass">
+               <input type="password" placeholder="Re-enter password" id="re-password">
+               <img src="../img/eye-icons/eye-close.png" id="re-eyeicon">
+            </div>
+         </div>
+
+         <div class="register-button">
+            <button id="register-button">Register</button>
+         </div>
+      </section>
+
+      <section class="login-block" id="login-block" style="display: none;">
+         <p class="register-mess">
+            Register Successfully! Please Login to Manage Your Profile.
+         </p>
+
+         <button type="button" onclick="location.href='Login.html'" id="login-button">
+            Login
+         </button>
+      </section>
+
+      <!-- script for hidden/un-hidden password -->
+      <script>
+         let eyeicon = document.getElementById("eyeicon");
+         let password = document.getElementById("password");
+
+         let reicon = document.getElementById("re-eyeicon");
+         let repassword = document.getElementById("re-password");
+
+         eyeicon.onclick = function()
+         {
+            if (password.type == "password")
+            {
+               password.type = "text";
+               eyeicon.src = "../img/eye-icons/eye-open.png";
+            }
+            else
+            {
+               password.type = "password";
+               eyeicon.src = "../img/eye-icons/eye-close.png";
+            }
+         }
+
+         reicon.onclick = function()
+         {
+            if (repassword.type == "password")
+            {
+               repassword.type = "text";
+               reicon.src = "../img/eye-icons/eye-open.png";
+            }
+            else
+            {
+               repassword.type = "password";
+               reicon.src = "../img/eye-icons/eye-close.png";
+            }
+         }
+      </script>
+
+      <!--script for post-register-->
+      <script>
+         let registerButton = document.getElementById("register-button");
+         let registerBlock = document.getElementById("register-block");
+         let loginBlock = document.getElementById("login-block");
+
+         registerButton.onclick = function()
+         {
+            registerBlock.style.display = 'none';
+            loginBlock.style.display = 'block';
+         }
+      </script>
+   </body>
+</html>

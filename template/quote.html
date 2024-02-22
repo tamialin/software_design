@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make a Quote</title>
+    <title>FUEL QUOTE</title>
     <link rel="stylesheet" href="../style/quote.css"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
             <a href="./about.html">About</a>
             <a href="./quote.html" class="active">Quote</a>
             <a href="./history.html">History</a>
-            <a href="/">Profile</a>
+            <a href="./ProfileManage.html">Profile</a>
             <a href="./Login.html">Login</a>
         </div>
     </nav>
@@ -26,7 +26,10 @@
                 <input type="number" id="gallonsRequested" step="0.1" min="0" required>
 
                 <label for="deliveryAddress">Delivery Address:</label>
-                <input type="text" id="deliveryAddress" required>
+                <input type="text" id="deliveryAddress" readonly value="123 Main St, Cityville">
+
+                <label for="deliveryDate">Delivery Date:</label>
+                <input type="date" id="deliveryDate" required>
 
                 <button type="button" onclick="calculateQuote()">Get Quote</button>
 
@@ -45,27 +48,34 @@
 
     <script>
         function calculateQuote() {
-            // Check if the form is valid
-            if (document.getElementById('quoteForm').checkValidity()) {
-                // Get user inputs
-                var gallonsRequested = parseFloat(document.getElementById('gallonsRequested').value);
-                var deliveryAddress = document.getElementById('deliveryAddress').value;
-
-                // Perform calculation (You can replace this with your actual calculation logic)
-                var suggestedPrice = gallonsRequested * 2.5;
-                var totalAmount = suggestedPrice + 10;
-
-                // Display results
-                document.getElementById('suggestedPrice').textContent = suggestedPrice.toFixed(2);
-                document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
-
-                // Show the results container
-                document.getElementById('quoteResults').style.display = 'block';
-
-                // Show the submit button
-                document.getElementById('submitBtn').style.display = 'block';
+            // Trigger validation
+            if (!document.getElementById('gallonsRequested').checkValidity() || !document.getElementById('deliveryDate').checkValidity()) {
+                document.getElementById('quoteForm').reportValidity();
+                return;
             }
+
+            // Get user inputs
+            var gallonsRequested = parseFloat(document.getElementById('gallonsRequested').value);
+            var deliveryDate = document.getElementById('deliveryDate').value;
+
+            // Set non-editable fields from client profile
+            // (In this case, we don't need to set the value for "Delivery Address" as it's set by default)
+
+            // Perform calculation (You can replace this with your actual calculation logic)
+            var suggestedPrice = 3.9;
+            var totalAmount = suggestedPrice * gallonsRequested;
+
+            // Display results
+            document.getElementById('suggestedPrice').textContent = suggestedPrice.toFixed(2);
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+
+            // Show the results container
+            document.getElementById('quoteResults').style.display = 'block';
+
+            // Show the submit button
+            document.getElementById('submitBtn').style.display = 'block';
         }
     </script>
+
 </body>
 </html>
