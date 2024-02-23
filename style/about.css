@@ -60,8 +60,10 @@ nav a.active {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    position: relative;
-    top: -350px;
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+    width: 100%;
 }
 
 .rectangle {
