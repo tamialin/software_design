@@ -54,3 +54,35 @@ nav a.active {
     background-size: cover;
     background-position: center;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    top: -350px;
+}
+
+.rectangle {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    border-radius: 20px; 
+    padding: 10px 20px;
+}
+
+/* CSS styles for the text */
+.text {
+    color: white; 
+    font-size: 24px; 
+    font-weight: bold; 
+    animation: slideToCenter 2s forwards; 
+}
+
+@keyframes slideToCenter {
+    from {
+        transform: translateX(-50%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
