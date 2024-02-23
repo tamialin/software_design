@@ -15,6 +15,9 @@ nav{
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 /* logo gas adj */
@@ -59,11 +62,11 @@ nav a.active {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 20vh;
     position: absolute;
-    top: 20%;
-    transform: translateY(-50%);
+    top: 100px;
     width: 100%;
+    z-index: 0;
 }
 
 .rectangle {
