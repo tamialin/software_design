@@ -9,11 +9,11 @@
 /* navigation tab adj */
 nav{
     height:80px;
-    background: #b60303;
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0rem calc(100vw - 1300px) / 2;
 }
 
 

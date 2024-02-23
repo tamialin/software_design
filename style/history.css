@@ -10,11 +10,11 @@
 /* navigation tab adj */
 nav{
     height:80px;
-    background: #b60303;
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0rem calc(100vw - 1300px) / 2;
 }
 
 /* logo gas adj */
@@ -59,14 +59,21 @@ nav a.active {
     width: 90%; /* Adjust the width as needed */
     margin: 20px auto; /* Center the table */
     border-collapse: collapse;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .previous-table th, .previous-table td {
-    padding: 20px;
+    padding: 15px;
     text-align: center; 
     border-bottom: 1px solid #ddd;
+    background-color: rgba(255,255,255,0.2);
 }
 
 .previous-table th {
     background-color: #FFDEAD;
+    text-align: center;
 }
+
