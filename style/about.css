@@ -73,6 +73,7 @@ nav a.active {
     background: linear-gradient(to right, #ff7e5f, #feb47b); 
     border-radius: 20px; 
     padding: 10px 20px;
+    display: inline-block;
 }
 
 /* CSS styles for the text */
@@ -90,4 +91,13 @@ nav a.active {
     to {
         transform: translateX(0);
     }
+}
+
+.about-us-paragraph {
+    text-align: center;
+    margin-top: 350px;
+    color: white;
+    font-size: 20px;
+    line-height: 2;
+    padding: 0 20px;
 }
