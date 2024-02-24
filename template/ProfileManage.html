@@ -26,22 +26,22 @@
          </p>
          <div class="input-box">
             <label class="required">Full Name</label>
-            <input type="text" placeholder="Full Name" required>
+            <input type="text" placeholder="Full Name" required maxlength="50">
          </div>
 
          <div class="input-box">
             <label class="required">Address 1</label>
-            <input type="Text" placeholder="Address 1" required>
+            <input type="Text" placeholder="Address 1" required maxlength="100">
          </div>
    
          <div class="input-box">
             <label class="option">Address 2</label>
-            <input type="text" placeholder="Address 2 (Optional)">
+            <input type="text" placeholder="Address 2 (Optional)" maxlength="100">
          </div>
 
          <div class="input-box">
             <label class="required">City</label>
-            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="City" required maxlength="100">
          </div>
 
          <div class="input-box">
@@ -107,7 +107,7 @@
 
          <div class="input-box">
             <label class="required">Zipcode</label>
-            <input type="text" placeholder="Zipcode" required>
+            <input type="text" pattern="[0-9]{5,9}" title="Please enter a valid numeric Zipcode with at least 5 digits." placeholder="Zipcode" required>
          </div>
          
          <div class="update-button">
