@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from utils.auth import handle_login
+from utils.profileUpdate import profileU
 
 app = Flask(__name__)
 
@@ -19,9 +20,10 @@ def quote():
 def history():
     return render_template('history.html')
 
-@app.route('/profile')
+@app.route('/profile', methods=["POST", "GET"])
 def profile():
-    return render_template('ProfileManage.html')
+    return profileU()
+    # return render_template('ProfileManage.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

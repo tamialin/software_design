@@ -24,113 +24,104 @@
          <p style="color: rgb(141, 0, 0);">
             All Fields With "*" Are Required!
          </p>
-         <div class="input-box">
-            <label class="required">Full Name</label>
-            <input type="text" placeholder="Full Name" required maxlength="50">
-         </div>
+         <form action ="{{url_for('profile')}}" method="POST" onsubmit="return profileUpd()">
 
-         <div class="input-box">
-            <label class="required">Address 1</label>
-            <input type="Text" placeholder="Address 1" required maxlength="100">
-         </div>
+            <div class="input-box">
+               <label class="required">Full Name</label>
+               <input type="text" placeholder="Full Name" required maxlength="50" name="fullname" id="fullname">
+            </div>
+
+            <div class="input-box">
+               <label class="required">Address 1</label>
+               <input type="Text" placeholder="Address 1" required maxlength="100" name="address1" id="address1">
+            </div>
    
-         <div class="input-box">
-            <label class="option">Address 2</label>
-            <input type="text" placeholder="Address 2 (Optional)" maxlength="100">
-         </div>
+            <div class="input-box">
+               <label class="option">Address 2</label>
+               <input type="text" placeholder="Address 2 (Optional)" maxlength="100" name="address2" id="address2">
+            </div>
 
-         <div class="input-box">
-            <label class="required">City</label>
-            <input type="text" placeholder="City" required maxlength="100">
-         </div>
+            <div class="input-box">
+               <label class="required">City</label>
+               <input type="text" placeholder="City" required maxlength="100" name="city" id="city">
+            </div>
 
-         <div class="input-box">
-            <label class="required">State</label>
-            <button>
-               <div class="dropdown-options">
-                  <select name="states" id="states" required>
-                     <option value="AL">Alabama</option>
-                     <option value="AK">Alaska</option>
-                     <option value="AZ">Arizona</option>
-                     <option value="AR">Arkansas</option>
-                     <option value="CA">California</option>
-                     <option value="CO">Colorado</option>
-                     <option value="CT">Connecticut</option>
-                     <option value="DE">Delaware</option>
-                     <option value="DC">District Of Columbia</option>
-                     <option value="FL">Florida</option>
-                     <option value="GA">Georgia</option>
-                     <option value="HI">Hawaii</option>
-                     <option value="ID">Idaho</option>
-                     <option value="IL">Illinois</option>
-                     <option value="IN">Indiana</option>
-                     <option value="IA">Iowa</option>
-                     <option value="KS">Kansas</option>
-                     <option value="KY">Kentucky</option>
-                     <option value="LA">Louisiana</option>
-                     <option value="ME">Maine</option>
-                     <option value="MD">Maryland</option>
-                     <option value="MA">Massachusetts</option>
-                     <option value="MI">Michigan</option>
-                     <option value="MN">Minnesota</option>
-                     <option value="MS">Mississippi</option>
-                     <option value="MO">Missouri</option>
-                     <option value="MT">Montana</option>
-                     <option value="NE">Nebraska</option>
-                     <option value="NV">Nevada</option>
-                     <option value="NH">New Hampshire</option>
-                     <option value="NJ">New Jersey</option>
-                     <option value="NM">New Mexico</option>
-                     <option value="NY">New York</option>
-                     <option value="NC">North Carolina</option>
-                     <option value="ND">North Dakota</option>
-                     <option value="OH">Ohio</option>
-                     <option value="OK">Oklahoma</option>
-                     <option value="OR">Oregon</option>
-                     <option value="PA">Pennsylvania</option>
-                     <option value="RI">Rhode Island</option>
-                     <option value="SC">South Carolina</option>
-                     <option value="SD">South Dakota</option>
-                     <option value="TN">Tennessee</option>
-                     <option value="TX">Texas</option>
-                     <option value="UT">Utah</option>
-                     <option value="VT">Vermont</option>
-                     <option value="VA">Virginia</option>
-                     <option value="WA">Washington</option>
-                     <option value="WV">West Virginia</option>
-                     <option value="WI">Wisconsin</option>
-                     <option value="WY">Wyoming</option>
-                  </select>
-               </div>
-            </button>
-         </div>
+            <div class="input-box">
+               <label class="required">State</label>
+               <button>
+                  <div class="dropdown-options">
+                     <select name="states" id="states" required>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                     </select>
+                  </div>
+               </button>
+            </div>
 
-         <div class="input-box">
-            <label class="required">Zipcode</label>
-            <input type="text" pattern="[0-9]{5,9}" title="Please enter a valid numeric Zipcode with at least 5 digits." placeholder="Zipcode" required>
-         </div>
+            <div class="input-box">
+               <label class="required">Zipcode</label>
+               <input type="text" pattern="[0-9]{5,9}" title="Please enter a valid numeric Zipcode with at least 5 digits." placeholder="Zipcode" required name="zip" id="zip">
+            </div>
          
-         <div class="update-button">
-            <button type="button" onclick="updateProfile()">Update Profile</button>
-         </div>
+            <div class="update-button">
+               <button type="submit" >Update Profile</button>
+            </div>
+         </form>
       </section>
 
       <script>
-         function updateProfile()
-         {
-            // Trigger validation
-            let requiredFields = document.querySelectorAll('[required]');
-
-            for (let field of requiredFields) {
-            if (!field.checkValidity()) {
-               field.reportValidity();
-               return;
-               }
-            }
-
-            alert("Profile Updated!");
+         function profileUpd() {
+            return true;
          }
-
       </script>
 
    </body>
