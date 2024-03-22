@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from utils.auth import handle_login
 from utils.profileUpdate import profileU
+from utils.pricing import fuelQuote
 
 app = Flask(__name__)
 
@@ -12,9 +13,10 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/quote')
+@app.route('/quote', methods=['POST', 'GET'])
 def quote():
-    return render_template('quote.html')
+    return fuelQuote()
+    # return render_template('quote.html')
 
 @app.route('/history')
 def history():
