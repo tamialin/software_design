@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from utils.auth import handle_login
 from utils.profileUpdate import profileU
-from utils.pricing import fuelQuote
+from utils.fuelModule import fuelQuote
 
 app = Flask(__name__)
 

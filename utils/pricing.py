@@ -1,6 +1,3 @@
-from flask import request, redirect, url_for, render_template
-# from profileUpdate import states
-
 class FuelPricing:
    def __init__(self):
       # Make all variables private
@@ -35,13 +32,3 @@ class FuelPricing:
       total_price = gallon * suggested_price
 
       return suggested_price, total_price
-
-def fuelQuote():
-   if request.method == 'POST':
-      gallon = request.form['gallonsRequested']
-      pricingModule = FuelPricing()
-      suggested_price, total_price = pricingModule.calculatingPrice(gallon)
-      return render_template('quote.html', 
-                             suggested_price = suggested_price, 
-                             total_price = total_price)
-   return render_template('quote.html')

@@ -35,16 +35,20 @@
 
                 <div id="quoteResults" style="display:none;">
                     <label>Suggested Price Per Gallon:</label>
-                    <span id="suggestedPrice"></span>
+                    <!-- <span id="suggestedPrice"></span> -->
+                    <p id="suggestedPrice"> {{ suggested_price }}</p>
 
                     <label>Total Amount:</label>
-                    <span id="totalAmount"></span>
+                    <!-- <span id="totalAmount"></span> -->
+                    <p id="totalAmount"> {{ total_price }} </p>
                 </div>
 
                 <button type="submit" id="submitBtn" style="display:none;">Submit</button>
             </form>
         </div>
     </section>
+    <p id="suggested_price"></p>
+    <p id="total_price"></p>
 
     <script>
         function calculateQuote() {
@@ -62,14 +66,13 @@
             // (In this case, we don't need to set the value for "Delivery Address" as it's set by default)
 
             // Get data returned from pricing.py
-            var suggestedPrice = "{{ suggested_price }}";
-            console.log(suggestedPrice);
-            var totalAmount = "{{ total_price }}";
-            console.log(totalAmount)
+            // var suggestedPrice = 3.9
+            // var totalAmount = 1000
+            
 
             // // Display results
-            document.getElementById('suggestedPrice').textContent = suggestedPrice.toFixed(2);
-            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+            // document.getElementById('suggestedPrice').textContent = suggestedPrice.toFixed(2);
+            // document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
 
 
             // Show the results container
