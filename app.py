@@ -13,7 +13,7 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/quote', methods=['POST', 'GET'])
+@app.route('/quote', methods=["POST", "GET"])
 def quote():
     return fuelQuote()
     # return render_template('quote.html')

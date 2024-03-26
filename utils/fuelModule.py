@@ -3,8 +3,8 @@ from utils.pricing import FuelPricing
 
 def fuelQuote():
    if request.method == 'POST':
-      gallon = request.form["gallonsRequested"]
+      gallon = float(request.form["gallonsRequested"]) # get amount of gallon from html file
       pricingModule = FuelPricing()
       suggested_price, total_price = pricingModule.calculatingPrice(gallon)
-      return render_template('quote.html', suggested_price = suggested_price, total_price = total_price)
+      return jsonify(suggested_price = suggested_price, total_price = total_price)
    return render_template('quote.html')
