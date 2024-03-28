@@ -1,34 +1,22 @@
 class FuelPricing:
-   def __init__(self):
-      # Make all variables private
-      self.__current_price = 1.5
-      self.__company_profit = 0.1
-      self.__gallon_factor = None
+    def __init__(self):
+        self.current_price = 1.5
+        self.company_profit = 0.1
+        self.location_factor = 0.04
+        self.history_factor = 0.01
+        self.__history = None
 
-      # if states == "TX":
-      #    self.__location_factor = 0.02
-      # else:
-      #    self.__location_factor = 0.04
-      self.__location_factor = 0.04
+    def calculatingPrice(self, gallon, return_customer=False):
+        gallon_factor = 0.03 if gallon <= 1000 else 0.02
 
-      self.__history = None
+        if return_customer == False:  # Changed to compare with boolean False
+            self.__history = 0.0
+        else:
+            self.__history = self.history_factor
 
-   def calculatingPrice(self, gallon):
-      return_customer = False
+        # Calculating the price
+        margin = self.location_factor - self.__history + gallon_factor + self.company_profit
+        suggested_price = round(margin * self.current_price, 2)
+        total_price = round(float(gallon * suggested_price), 2)
 
-      if gallon > 1000:
-         self.__gallon_factor = 0.02
-      else:
-         self.__gallon_factor = 0.03
-         
-      if return_customer == "False":
-         self.__history = 0.0
-      else:
-         self.__history = 0.01
-      
-      #  Calculating the price
-      margin = self.__location_factor - self.__history + self.__gallon_factor + self.__company_profit
-      suggested_price =  round(margin * self.__current_price, 2)
-      total_price = round(float(gallon * suggested_price), 2)
-
-      return suggested_price, total_price
+        return suggested_price, total_price
