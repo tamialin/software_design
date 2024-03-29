@@ -32,9 +32,8 @@ def history():
 
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
-
-    return profileU()
-    # return render_template('ProfileManage.html')
+    #return profileU()
+    return render_template('ProfileManage.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
