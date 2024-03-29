@@ -46,8 +46,28 @@ def logout():
     session["username"] = None
     return redirect("/")
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        # Process registration form data
+        username = request.form['username']
+        password = request.form['password']
+        reenter_password = request.form['re-password']
+
+        # Validate form fields
+        if not all([username, password, reenter_password]):
+            return "All fields are required", 400  # Bad request
+
+        if password != reenter_password:
+            return "Password and Re-enter Password must be the same", 400  # Bad request
+
+        # Additional registration logic (e.g., database operations) can go here...
+
+        # Set the username in the session after successful registration
+        session['username'] = username
+
+        # Redirect the user after successful registration
+        return redirect(url_for('home'))
     return render_template('Register.html')
 
 if __name__ == '__main__':
