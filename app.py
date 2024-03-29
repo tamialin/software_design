@@ -32,6 +32,7 @@ def history():
 
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
+
     return profileU()
     # return render_template('ProfileManage.html')
 
