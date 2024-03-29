@@ -15,4 +15,5 @@ def profileU():
             return render_template('ProfileManage.html', error_message=error_message)
         else:
             return redirect(url_for('history'))
-    return render_template('quote.html')
+    return render_template('ProfileManage.html')
+    #return render_template('quote.html')
