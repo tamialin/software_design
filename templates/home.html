@@ -7,17 +7,7 @@
     <link rel="stylesheet" href="../static/style.css"/>
 </head>
 <body>
-    <nav>
-        <div class="logo"> FUEL QUOTE </div>
-        <div class="nav-items">
-            <a href="{{url_for('home')}}" class="active">Home</a>
-            <a href="{{url_for('about')}}">About</a>
-            <a href="{{url_for('quote')}}">Quote</a>
-            <a href="{{url_for('history')}}">History</a>
-            <a href="{{url_for('profile')}}">Profile</a>
-            <a href="{{url_for('login')}}">Login</a>
-        </div>
-    </nav>
+    {% include 'navbar.html' %}
     <section class="hero">
         <div class="hero-container">
             <div class="column-left">
