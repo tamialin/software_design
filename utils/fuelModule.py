@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, redirect, url_for, render_template
+from flask import Flask, jsonify, request, redirect, url_for, render_template, session
 from utils.pricing import FuelPricing
 
 def fuelQuote():
