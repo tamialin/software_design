@@ -7,17 +7,7 @@
     <link rel="stylesheet" href="../static/register.css"/>
 </head>
 <body>
-   <nav>
-        <div class="logo"> FUEL QUOTE </div>
-        <div class="nav-items">
-         <a href="{{url_for('home')}}">Home</a>
-         <a href="{{url_for('about')}}">About</a>
-         <a href="{{url_for('quote')}}">Quote</a>
-         <a href="{{url_for('history')}}">History</a>
-         <a href="{{url_for('profile')}}">Profile</a>
-         <a href="{{url_for('login')}}" class="active">Login</a>
-        </div>
-   </nav>
+   {% include 'navbar.html' %}
       <section class="register-block" id="register-block">
          <h3>Create Your Account</h3>
 
@@ -52,7 +42,7 @@
             Register Successfully! Please Login to Manage Your Profile.
          </p>
 
-         <button type="button" onclick="location.href='Login.html'" id="login-button">
+         <button type="button" onclick="location.href='{{ url_for('profile') }}'" id="login-button">
             Login
          </button>
       </section>
