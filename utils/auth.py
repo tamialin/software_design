@@ -12,7 +12,7 @@ def handle_login():
         if username in users and users[username] == password:
             # Authentication successful, you can redirect to another page or perform additional actions
             session["username"] = username
-            return redirect(url_for('profile'))
+            return redirect(url_for('home'))
         else:
             # Authentication failed, you can display an error message
             error_message = "Invalid username or password. Please try again."

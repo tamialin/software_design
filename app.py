@@ -19,6 +19,8 @@ def about():
 
 @app.route('/quote', methods=["POST", "GET"])
 def quote():
+    if not session.get("username"):
+        return redirect("/login")
     return fuelQuote()
     # return render_template('quote.html')
 
