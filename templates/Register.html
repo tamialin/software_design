@@ -10,31 +10,32 @@
    {% include 'navbar.html' %}
       <section class="register-block" id="register-block">
          <h3>Create Your Account</h3>
-
-         <div class="input-box">
-            <label class="required">Email</label>
-            <input class="register-email" type="Text" placeholder="Email" required>
-         </div>
-
-         <div class="input-box">
-            <label class="required">Password</label>
-            <div class="enter-pass">
-               <input type="password" placeholder="Password" id="password" required>
-               <img src="../static/img/eye-icons/eye-close.png" id="eyeicon">
+         <form action="/register", method="POST" onsubmit="return registerAccount()">
+            <div class="input-box">
+               <label class="required">Email</label>
+               <input class="register-email" type="Text" placeholder="Email" required>
             </div>
-         </div>
-
-         <div class="input-box">
-            <label class="required">Re-enter Password</label>
-            <div class="re-enter-pass">
-               <input type="password" placeholder="Re-enter password" id="re-password" required>
-               <img src="../static/img/eye-icons/eye-close.png" id="re-eyeicon">
+   
+            <div class="input-box">
+               <label class="required">Password</label>
+               <div class="enter-pass">
+                  <input type="password" placeholder="Password" id="password" required>
+                  <img src="../static/img/eye-icons/eye-close.png" id="eyeicon">
+               </div>
             </div>
-         </div>
-
-         <div class="register-button">
-            <button id="register-button">Register</button>
-         </div>
+   
+            <div class="input-box">
+               <label class="required">Re-enter Password</label>
+               <div class="re-enter-pass">
+                  <input type="password" placeholder="Re-enter password" id="re-password" required>
+                  <img src="../static/img/eye-icons/eye-close.png" id="re-eyeicon">
+               </div>
+            </div>
+   
+            <div class="register-button">
+               <button id="register-button">Register</button>
+            </div>
+         </form>
       </section>
 
       <section class="login-block" id="login-block" style="display: none;">
@@ -112,5 +113,12 @@
             loginBlock.style.display = 'block';
          }
       </script>
+
+      <script>
+         function registerAccount() {
+            return true;
+         }
+      </script>
+      
    </body>
 </html>
