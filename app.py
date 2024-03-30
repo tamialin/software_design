@@ -36,6 +36,8 @@ def history():
 
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
+    if not session.get("username"):
+        return redirect("/login")
     return profileU()
     #return render_template('ProfileManage.html')
 

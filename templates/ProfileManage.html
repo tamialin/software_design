@@ -18,29 +18,28 @@
 
             <div class="input-box">
                <label for="fullname" class="required">Full Name</label>
-               <input type="text" placeholder="Full Name" required maxlength="50" name="fullname" id="fullname">
+               <input type="text" required maxlength="50" value="{{ user_data['fullname'] }}" name="fullname" id="fullname">
             </div>
 
             <div class="input-box">
                <label for="address1" class="required">Address 1</label>
-               <input type="Text" placeholder="Address 1" required maxlength="100" name="address1" id="address1">
+               <input type="Text" required maxlength="100" value="{{ user_data['address1'] }}" name="address1" id="address1">
             </div>
    
             <div class="input-box">
                <label for="address2" class="option">Address 2</label>
-               <input type="text" placeholder="Address 2 (Optional)" maxlength="100" name="address2" id="address2">
+               <input type="text" maxlength="100" value="{{ user_data['address2'] }}" name="address2" id="address2">
             </div>
 
             <div class="input-box">
                <label for="city" class="required">City</label>
-               <input type="text" placeholder="City" required maxlength="100" name="city" id="city">
+               <input type="text" required maxlength="100" value="{{ user_data['city'] }}" name="city" id="city">
             </div>
 
             <div class="input-box">
                <label for="states" class="required">State</label>
-               <button>
                   <div class="dropdown-options">
-                     <select name="states" id="states" required>
+                     <select value="{{ user_data['states'] }}" name="states" id="states" required>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -94,12 +93,11 @@
                         <option value="WY">Wyoming</option>
                      </select>
                   </div>
-               </button>
             </div>
 
             <div class="input-box">
                <label for="zip" class="required">Zipcode</label>
-               <input type="text" pattern="[0-9]{5,9}" title="Please enter a valid numeric Zipcode with at least 5 digits." placeholder="Zipcode" required name="zip" id="zip">
+               <input type="text" pattern="[0-9]{5,9}" value="{{ user_data['zip'] }}" title="Please enter a valid numeric Zipcode with at least 5 digits." required name="zip" id="zip">
             </div>
          
             <div class="update-button">
