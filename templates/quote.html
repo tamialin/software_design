@@ -23,7 +23,7 @@
                 <input type="text" id="deliveryAddress" readonly value="123 Main St, Cityville">
 
                 <label for="deliveryDate">Delivery Date:</label>
-                <input type="date" id="deliveryDate" required>
+                <input type="date" id="deliveryDate" name="deliveryDate" required>
 
                 <!-- Button to request a quote-->
                 <button type="submit">Get Quote</button>
@@ -47,11 +47,15 @@
 
             function sendData() {
                 const gallon = $('#gallonsRequested').val();
+                const deliveryDate = $('#deliveryDate').val();
 
                 $.ajax({
                     url: '/quote',
                     method : 'POST',
-                    data : {gallonsRequested : gallon},
+                    data : {
+                        gallonsRequested : gallon,
+                        deliveryDate: deliveryDate
+                    },
                     success: function(data) {
                         $('#quoteResults').html(`
                             <label>Suggested Price Per Gallon:</label>
