@@ -13,7 +13,5 @@ def profileU():
         if fullname == "" or address1 == "" or city == "" or states == "" or zip == "":
             error_message = "Please fill out empty fields"
             return render_template('ProfileManage.html', error_message=error_message)
-        else:
-            return render_template('ProfileManage.html', fullname = fullname, address1=address1, address2=address2, city = city, states = states, zip = zip)
     # if GET 
-    return render_template('ProfileManage.html')
+    return render_template('ProfileManage.html', fullname = fullname, address1=address1, address2=address2, city = city, states = states, zip = zip)
