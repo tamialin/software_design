@@ -35,7 +35,8 @@ def history():
 
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
-    #need to add profile display if profile completed and button to edit profile and save new profile
+    if not session.get("username"):
+        return redirect("/login")
     return profileU()
     #return render_template('ProfileManage.html')
 
