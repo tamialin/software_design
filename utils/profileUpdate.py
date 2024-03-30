@@ -1,19 +1,22 @@
 from flask import request, redirect, url_for, render_template, Flask, session
 
+users = {
+    'user1': {'fullname': 'Heidar here', 'address1': '1314', 'address2': 'shadowbrook', 'city': 'Houston', 'state': 'CA', 'zip': '12345'}
+}
+
 def profileU():
     if request.method == 'POST':
-        fullname = request.form['fullname']
-        address1 = request.form['address1']
-        address2 = request.form['address2']
-        city = request.form['city']
-        states = request.form['states']
-        zip = request.form['zip']
+        username = 'user1'
+        users [username]= {
+        'fullname' : request.form['fullname'], 
+        'address1' : request.form['address1'],
+        'address2' : request.form['address2'],
+        'city' : request.form['city'],
+        'states' : request.form['states'],
+        'zip' : request.form['zip'],
+        }
+        
+        return redirect(url_for('home'))
+        #return "Profile updated successfully"
 
-        # Check if input is correct
-        if fullname == "" or address1 == "" or city == "" or states == "" or zip == "":
-            error_message = "Please fill out empty fields"
-            return render_template('ProfileManage.html', error_message=error_message)
-        else:
-            return render_template('ProfileManage.html', fullname = fullname, address1=address1, address2=address2, city = city, states = states, zip = zip)
-    # if GET 
     return render_template('ProfileManage.html')
