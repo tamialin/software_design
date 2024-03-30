@@ -14,7 +14,6 @@
          <p style="color: rgb(141, 0, 0);">
             All Fields With "*" Are Required!
          </p>
-         <!-- <form action ="{{url_for('profile')}}" method="POST" onsubmit="return profileUdp()"> -->
          <form id="profile-form" method="POST" onsubmit="return profileUpd()">
 
             <div class="input-box">
@@ -107,10 +106,31 @@
                <button type="submit" >Update Profile</button>
             </div>
          </form>
+         {% if error_message %}
+            <div class="error-message">
+               {{ error_message }}
+            </div>
+         {% endif %}
       </section>
 
       <script>
          function profileUpd() {
+            // Trigger validation
+            let requiredFields = document.querySelectorAll('[required]');
+
+            for (let field of requiredFields) {
+            if (!field.checkValidity()) {
+               field.reportValidity();
+               return;
+               }
+            }
+            let fullname = document.getElementById("fullname");
+            let address1 = document.getElementById("address1");
+            let address2 = document.getElementById("address2");
+            let city = document.getElementById("city");
+            let states = document.getElementById("states");
+            let zip = document.getElementById("zip");
+            
             showProfileUpdatedMessage();
             return true;
          }
