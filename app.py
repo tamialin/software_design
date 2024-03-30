@@ -3,6 +3,7 @@ from flask_session import Session
 from utils.auth import handle_login
 from utils.profileUpdate import profileU
 from utils.fuelModule import fuelQuote
+from utils.history import get_quote_history
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -21,6 +22,7 @@ def about():
 def quote():
     if not session.get("username"):
         return redirect("/login")
+    username = session.get('username')
     return fuelQuote()
     # return render_template('quote.html')
 
@@ -28,7 +30,9 @@ def quote():
 def history():
     if not session.get("username"):
         return redirect("/login")
-    return render_template('history.html')
+    username = session.get('username')  # Assuming you have stored the username in the session
+    quote_history = get_quote_history(username)
+    return render_template('history.html', quote_history=quote_history)
 
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
