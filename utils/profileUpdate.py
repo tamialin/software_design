@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template
+from flask import request, redirect, url_for, render_template, Flask, session
 
 def profileU():
     if request.method == 'POST':
@@ -10,10 +10,10 @@ def profileU():
         zip = request.form['zip']
 
         # Check if input is correct
-        if fullname =="" or address1=="" or city=="" or states=="" or zip=="":
+        if fullname == "" or address1 == "" or city == "" or states == "" or zip == "":
             error_message = "Please fill out empty fields"
             return render_template('ProfileManage.html', error_message=error_message)
         else:
-            return redirect(url_for('history'))
+            return render_template('ProfileManage.html', fullname = fullname, address1=address1, address2=address2, city = city, states = states, zip = zip)
+    # if GET 
     return render_template('ProfileManage.html')
-    #return render_template('quote.html')
