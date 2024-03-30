@@ -1,9 +1,6 @@
 from flask import request, redirect, url_for, render_template, session
 from utils.temp_db import users_db
 
-# Hardcoded user credentials
-# users = {'user1': 'password1', 'user2': 'password2'}
-
 def handle_login():
     if request.method == 'POST':
         username = request.form['username']
