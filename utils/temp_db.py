@@ -2,7 +2,8 @@ users_db = {
     'user1': {
         'password': 'password1',
         'fullName': 'John Doe',
-        'address': '123 Main St',
+        'address1': '1314 shadowbrook St',
+        'address2': 'haha',
         'city': 'Anytown',
         'state': 'CA',
         'zipCode': '12345'
@@ -10,7 +11,8 @@ users_db = {
     'user2': {
         'password': 'password2',
         'fullName': 'Jane Smith',
-        'address': '456 Elm St',
+        'address1': '456 Elm St',
+        'address2': '',
         'city': 'Othertown',
         'state': 'NY',
         'zipCode': '67890'
