@@ -22,7 +22,6 @@ def about():
 def quote():
     if not session.get("username"):
         return redirect("/login")
-    username = session.get('username')
     return fuelQuote()
     # return render_template('quote.html')
 
