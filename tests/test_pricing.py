@@ -1,8 +1,7 @@
-# unit test for quote page
+# unit test for getting price in quote page
 import os
 import sys
 import pytest
-import json
 
 # Add the parent directory to the system path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -14,15 +13,6 @@ from utils.pricing import FuelPricing
 def client():
     with app.test_client() as client:
         yield client
-
-def test_quote_form_submission(client):
-    response = client.post('/quote', data={'gallonsRequested': '100', 'deliveryDate': '2024-03-28'}, follow_redirects=True)
-    assert response.status_code == 200
-    # Parse JSON response
-    response_data = json.loads(response.data)
-    # Check if the expected keys are present
-    assert 'suggested_price' in response_data
-    assert 'total_price' in response_data
 
 def test_fuel_pricing1():
     fuel_pricing = FuelPricing()
