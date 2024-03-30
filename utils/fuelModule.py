@@ -9,14 +9,15 @@ def fuelQuote():
       suggested_price, total_price = pricingModule.calculatingPrice(gallon)
 
       # Assuming you have access to the username through session or some other means
-      username = "user1"  # Replace with actual username retrieval logic
+      username = session.get("username")  # Replace with actual username retrieval logic
 
-        # Prepare quote data
-      quote_data = {
-            'gallon': gallon,
-            'suggested_price': suggested_price,
-            'total_price': total_price
-      }
+      # Prepare quote data
+      if username:
+         quote_data = {
+               'gallon': gallon,
+               'suggested_price': suggested_price,
+               'total_price': total_price
+         }
         # Update quote history
       update_quote_history(username, quote_data)
       
