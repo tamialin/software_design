@@ -40,57 +40,57 @@
                <label for="states" class="required">State</label>
                   <div class="dropdown-options">
                      <select value="{{ user_data['states'] }}" name="states" id="states" required>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="DC">District Of Columbia</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
+                        <option value="AL" {% if user_data['states'] == 'AL' %} selected {% endif %}>Alabama</option>
+                        <option value="AK" {% if user_data['states'] == 'AK' %} selected {% endif %}>Alaska</option>
+                        <option value="AZ" {% if user_data['states'] == 'AZ' %} selected {% endif %}>Arizona</option>
+                        <option value="AR" {% if user_data['states'] == 'AR' %} selected {% endif %}>Arkansas</option>
+                        <option value="CA" {% if user_data['states'] == 'CA' %} selected {% endif %}>California</option>
+                        <option value="CO" {% if user_data['states'] == 'CO' %} selected {% endif %}>Colorado</option>
+                        <option value="CT" {% if user_data['states'] == 'CT' %} selected {% endif %}>Connecticut</option>
+                        <option value="DE" {% if user_data['states'] == 'DE' %} selected {% endif %}>Delaware</option>
+                        <option value="DC" {% if user_data['states'] == 'DC' %} selected {% endif %}>District Of Columbia</option>
+                        <option value="FL" {% if user_data['states'] == 'FL' %} selected {% endif %}>Florida</option>
+                        <option value="GA" {% if user_data['states'] == 'GA' %} selected {% endif %}>Georgia</option>
+                        <option value="HI" {% if user_data['states'] == 'HI' %} selected {% endif %}>Hawaii</option>
+                        <option value="ID" {% if user_data['states'] == 'ID' %} selected {% endif %}>Idaho</option>
+                        <option value="IL" {% if user_data['states'] == 'IL' %} selected {% endif %}>Illinois</option>
+                        <option value="IN" {% if user_data['states'] == 'IN' %} selected {% endif %}>Indiana</option>
+                        <option value="IA" {% if user_data['states'] == 'IA' %} selected {% endif %}>Iowa</option>
+                        <option value="KS" {% if user_data['states'] == 'KS' %} selected {% endif %}>Kansas</option>
+                        <option value="KY" {% if user_data['states'] == 'KY' %} selected {% endif %}>Kentucky</option>
+                        <option value="LA" {% if user_data['states'] == 'LA' %} selected {% endif %}>Louisiana</option>
+                        <option value="ME" {% if user_data['states'] == 'ME' %} selected {% endif %}>Maine</option>
+                        <option value="MD" {% if user_data['states'] == 'MD' %} selected {% endif %}>Maryland</option>
+                        <option value="MA" {% if user_data['states'] == 'MA' %} selected {% endif %}>Massachusetts</option>
+                        <option value="MI" {% if user_data['states'] == 'MI' %} selected {% endif %}>Michigan</option>
+                        <option value="MN" {% if user_data['states'] == 'MN' %} selected {% endif %}>Minnesota</option>
+                        <option value="MS" {% if user_data['states'] == 'MS' %} selected {% endif %}>Mississippi</option>
+                        <option value="MO" {% if user_data['states'] == 'MO' %} selected {% endif %}>Missouri</option>
+                        <option value="MT" {% if user_data['states'] == 'MT' %} selected {% endif %}>Montana</option>
+                        <option value="NE" {% if user_data['states'] == 'NE' %} selected {% endif %}>Nebraska</option>
+                        <option value="NV" {% if user_data['states'] == 'NV' %} selected {% endif %}>Nevada</option>
+                        <option value="NH" {% if user_data['states'] == 'NH' %} selected {% endif %}>New Hampshire</option>
+                        <option value="NJ" {% if user_data['states'] == 'NJ' %} selected {% endif %}>New Jersey</option>
+                        <option value="NM" {% if user_data['states'] == 'NM' %} selected {% endif %}>New Mexico</option>
+                        <option value="NY" {% if user_data['states'] == 'NY' %} selected {% endif %}>New York</option>
+                        <option value="NC" {% if user_data['states'] == 'NC' %} selected {% endif %}>North Carolina</option>
+                        <option value="ND" {% if user_data['states'] == 'ND' %} selected {% endif %}>North Dakota</option>
+                        <option value="OH" {% if user_data['states'] == 'OH' %} selected {% endif %}>Ohio</option>
+                        <option value="OK" {% if user_data['states'] == 'OK' %} selected {% endif %}>Oklahoma</option>
+                        <option value="OR" {% if user_data['states'] == 'OR' %} selected {% endif %}>Oregon</option>
+                        <option value="PA" {% if user_data['states'] == 'PA' %} selected {% endif %}>Pennsylvania</option>
+                        <option value="RI" {% if user_data['states'] == 'RI' %} selected {% endif %}>Rhode Island</option>
+                        <option value="SC" {% if user_data['states'] == 'SC' %} selected {% endif %}>South Carolina</option>
+                        <option value="SD" {% if user_data['states'] == 'SD' %} selected {% endif %}>South Dakota</option>
+                        <option value="TN" {% if user_data['states'] == 'TN' %} selected {% endif %}>Tennessee</option>
+                        <option value="TX" {% if user_data['states'] == 'TX' %} selected {% endif %}>Texas</option>
+                        <option value="UT" {% if user_data['states'] == 'UT' %} selected {% endif %}>Utah</option>
+                        <option value="VT" {% if user_data['states'] == 'VT' %} selected {% endif %}>Vermont</option>
+                        <option value="VA" {% if user_data['states'] == 'VA' %} selected {% endif %}>Virginia</option>
+                        <option value="WA" {% if user_data['states'] == 'WA' %} selected {% endif %}>Washington</option>
+                        <option value="WV" {% if user_data['states'] == 'WV' %} selected {% endif %}>West Virginia</option>
+                        <option value="WI" {% if user_data['states'] == 'WI' %} selected {% endif %}>Wisconsin</option>
+                        <option value="WY" {% if user_data['states'] == 'WY' %} selected {% endif %}>Wyoming</option>
                      </select>
                   </div>
             </div>
