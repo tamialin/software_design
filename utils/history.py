@@ -14,6 +14,3 @@ def get_quote_history(username):
         return quote_history_db[username]
     else:
         return []
-
-
-# create an object/list to store values passed from fuelModule and render it back to history.html
