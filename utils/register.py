@@ -1,20 +1,26 @@
-# from flask import request, redirect, url_for, render_template, session
+from flask import request, render_template
+import time
 
-# # Hardcoded user credentials
-# users = {'user1': 'password1', 'user2': 'password2'}
-
-# def handle_login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         # Check if the username exists and the password is correct
-#         if username in users and users[username] == password:
-#             # Authentication successful, you can redirect to another page or perform additional actions
-#             session["username"] = username
-#             return redirect(url_for('home'))
-#         else:
-#             # Authentication failed, you can display an error message
-#             error_message = "Invalid username or password. Please try again."
-#             return render_template('Login.html', error_message=error_message)
-#     return render_template('Login.html')
+def register_user(mysql):
+    username = request.form['username']
+    password = request.form['password']
+    
+    # Check if user already exists
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+    user = cur.fetchone()
+    
+    if user:
+        message = 'Username already exists.'
+        time.sleep(3)
+        return render_template('register.html', message=message)
+    
+    # Insert new user into the database
+    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+    mysql.connection.commit()
+    cur.close()
+    
+    message = 'Register Successfully!'
+    render_template('register.html', message=message)
+    time.sleep(3)
+    return render_template('login.html', message=message)
