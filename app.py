@@ -53,7 +53,10 @@ def profile():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return handle_login()
+    if request.method == 'GET':
+        return render_template('Login.html')
+    if request.method == 'POST':
+        return handle_login(mysql)
 
 @app.route('/logout')
 def logout():
