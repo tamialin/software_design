@@ -13,13 +13,13 @@
          <form action="/register", method="POST" onsubmit="return registerAccount()">
             <div class="input-box">
                <label class="required">Email</label>
-               <input class="register-email" type="Text" placeholder="Email" required>
+               <input class="register-email" type="Text" placeholder="Email" name="username" required>
             </div>
    
             <div class="input-box">
                <label class="required">Password</label>
                <div class="enter-pass">
-                  <input type="password" placeholder="Password" id="password" required>
+                  <input type="password" placeholder="Password" id="password" name="password" required>
                   <img src="../static/img/eye-icons/eye-close.png" id="eyeicon">
                </div>
             </div>
@@ -39,13 +39,9 @@
       </section>
 
       <section class="login-block" id="login-block" style="display: none;">
-         <p class="register-mess">
-            Register Successfully! Please Login to Manage Your Profile.
+         <p class="register-mess" id="register-message">
+            {{ message }}
          </p>
-
-         <button type="button" onclick="location.href='{{ url_for('profile') }}'" id="login-button">
-            Login
-         </button>
       </section>
 
       <!-- script for hidden/un-hidden password -->

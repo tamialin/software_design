@@ -1,14 +1,24 @@
 from flask import Flask, render_template, url_for, session, redirect, request
 from flask_session import Session
+from flask_mysqldb import MySQL
+
 from utils.auth import handle_login
 from utils.profileUpdate import profileU
 from utils.fuelModule import fuelQuote
 from utils.history import get_quote_history
+from utils.register import register_user
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'tamialin'
+app.config['MYSQL_DB'] = 'our_users'
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+mysql = MySQL(app)
 
 @app.route('/')
 def home():
@@ -50,9 +60,12 @@ def logout():
     session["username"] = None
     return redirect("/")
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    return render_template('Register.html')
+    if request.method == 'GET':
+        return render_template('register.html')
+    if request.method == 'POST':
+        return register_user(mysql)
 
 if __name__ == '__main__':
     app.run(debug=True)
