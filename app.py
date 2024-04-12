@@ -11,7 +11,11 @@ from utils.register import register_user
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
+<<<<<<< HEAD
 app.config['MYSQL_PASSWORD'] = 'LP1997Win100%'
+=======
+app.config['MYSQL_PASSWORD'] = 'shadowbrook'
+>>>>>>> main
 app.config['MYSQL_DB'] = 'our_users'
 
 app.config["SESSION_PERMANENT"] = False
@@ -47,7 +51,7 @@ def history():
 def profile():
     if not session.get("username"):
         return redirect("/login")
-    return profileU()
+    return profileU(mysql)
     #return render_template('ProfileManage.html')
 
 
