@@ -29,7 +29,8 @@ def login(client, username, password):
         username=username,
         password=password
     ), follow_redirects=True)
-    
+
+# login and without login:
 def test_quote_page(client):
     with client.session_transaction() as sess:
         sess['username'] = None  # Simulate not logged in
@@ -61,6 +62,20 @@ def test_history_page_login(client):
     response = client.get('/history')
     assert response.status_code == 200
     assert b"History" in response.data
+    
+def test_profile_page(client):
+    with client.session_transaction() as sess:
+        sess['username'] = None
+    response = client.get('/profile')
+    assert response.status_code == 302
+    assert response.headers['Location'] == '/login'
+    
+def test_profile_page_login(client):
+    login_response = login(client, 'user1', 'password1')
+    assert login_response.status_code == 200
+    response = client.get('/profile')
+    assert response.status_code == 200
+    assert b"My Profile" in response.data
 
 def test_login_page(client):
     response = client.get('/login')

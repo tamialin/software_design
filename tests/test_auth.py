@@ -1,3 +1,4 @@
+# unit test for login page
 import os
 import sys
 import pytest
@@ -13,7 +14,6 @@ def client():
     with app.test_client() as client:
         yield client
 
-# unit test for login page
 def test_login_success1(client):
     response = client.post('/login', data=dict(username='user1', password='password1'), follow_redirects=True)
     assert response.status_code == 200

@@ -1,19 +1,23 @@
 users_db = {
     'user1': {
         'password': 'password1',
-        'fullName': 'John Doe',
-        'address': '123 Main St',
+        'username': 'user1',
+        'fullname': 'John Doe',
+        'address1': '1314 Shadowbrook St',
+        'address2': '',
         'city': 'Anytown',
-        'state': 'CA',
-        'zipCode': '12345'
+        'states': 'CA',
+        'zip': '12345'
     },
     'user2': {
         'password': 'password2',
-        'fullName': 'Jane Smith',
-        'address': '456 Elm St',
+        'username': 'user2',
+        'fullname': 'Jane Smith',
+        'address1': '456 Elm St',
+        'address2': '',
         'city': 'Othertown',
-        'state': 'NY',
-        'zipCode': '67890'
+        'states': 'NY',
+        'zip': '67890'
     }
 }
 
