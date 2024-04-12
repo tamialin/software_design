@@ -23,7 +23,6 @@ def fuelQuote(mysql):
 
       # Get username from DB
       username = session.get("username")
-      cur = mysql.connection.cursor()
       # cur.execute("SELECT * FROM users WHERE username = %s", (username,))
       # user = cur.fetchone()
 
