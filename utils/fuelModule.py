@@ -5,22 +5,23 @@ from utils.temp_db import users_db
 
 
 def fuelQuote(mysql):
+   # Get username from DB
+   username = session.get("username")
+   cur = mysql.connection.cursor()
+
+   # Get address from profile
+   cur.execute("SELECT address1, city, states, zip from users WHERE username = %s", (username,))
+   fetchValues = cur.fetchone()
+   if fetchValues:
+      address = fetchValues[0]
+      city = fetchValues[1]
+      state = fetchValues[2]
+      zipCode = fetchValues[3]
+      dAddress  = f"{address} - {city} - {state} - {zipCode}"
+   else:
+      dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
+
    if request.method == 'POST':
-
-      # Get username from DB
-      username = session.get("username")
-      cur = mysql.connection.cursor()
-      # cur.execute("SELECT * FROM users WHERE username = %s", (username,))
-      # user = cur.fetchone()
-
-      # Get address from profile
-      cur.execute("SELECT address1, city, states from users WHERE username = %s", (username,))
-      fetchValues = cur.fetchone()
-      if fetchValues:
-         address = fetchValues[0]
-         city = fetchValues[1]
-         state = fetchValues[2]
-         deliveryAddress  = f"{address} - {city} - {state}"
 
       # Receive input from quote  page
       gallon = float(request.form["gallonsRequested"])
@@ -28,29 +29,15 @@ def fuelQuote(mysql):
       pricingModule = FuelPricing()
       suggested_price, total_price = pricingModule.calculatingPrice(gallon, state)
 
-      # address = request.form["deliveryAddress"]
-
-         # # Prepare quote data
-         # if username:
-         #    quote_data = {
-         #       'delivery_date': delivery_date,
-         #       'gallon_requested': gallon,
-         #       'delivery_address': users_db[username]['address1'],
-         #       'suggested_price': suggested_price,
-         #       'total_price': total_price,
-         #    }
-         # # Update quote history
-         # update_quote_history(username, quote_data)
-
-         # Return the value to display quote
+      # Return the value to display quote
       if 'displayData' in request.form:
          return jsonify(suggested_price = suggested_price, total_price = total_price)
-      elif 'sendData' in request.form:
+      elif 'sendData' in request.form: #Send data to DB
          sendToDB(mysql, username, date, gallon, address, suggested_price, total_price)
          return jsonify(success = True)
 
    # send user input and prices to history backend
-   return render_template('quote.html')  
+   return render_template('quote.html', dAddress = dAddress)  
 
 def sendToDB(mysql, username, date, gallon, address, suggested_price, total_price):
    username = session.get("username")
