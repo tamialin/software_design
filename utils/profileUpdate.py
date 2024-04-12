@@ -25,7 +25,7 @@ def profileU(mysql):
         mysql.connection.commit()
         dbInfo.close()
 
-        return redirect(url_for('home'))
+        return redirect(url_for('profile'))
         #return "Profile updated successfully"
     else :
         print("get database data:\n", user_data)

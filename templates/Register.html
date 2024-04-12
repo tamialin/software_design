@@ -27,7 +27,7 @@
             <div class="input-box">
                <label class="required">Re-enter Password</label>
                <div class="re-enter-pass">
-                  <input type="password" placeholder="Re-enter password" id="re-password" required>
+                  <input type="password" placeholder="Re-enter password" id="re-password" name="re-password" required>
                   <img src="../static/img/eye-icons/eye-close.png" id="re-eyeicon">
                </div>
             </div>
@@ -35,14 +35,24 @@
             <div class="register-button">
                <button id="register-button">Register</button>
             </div>
+            {% if error_message %}
+               <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+            {% if success_message %}
+               <p class="success-message">{{ success_message }}</p>
+            {% endif %}
          </form>
       </section>
 
-      <section class="login-block" id="login-block" style="display: none;">
-         <p class="register-mess" id="register-message">
-            {{ message }}
-         </p>
-      </section>
+      <script>
+         {% if success_message %}
+             setTimeout(function() {
+                 window.location.href = "/profile";
+             }, 3000); // 3 seconds
+         {% endif %}
+      </script>
+
+
 
       <!-- script for hidden/un-hidden password -->
       <script>
@@ -99,14 +109,6 @@
                return;
                }
             }
-
-            if (password !== reenterPassword) {
-               alert("Password and Re-enter Password must be the same");
-               return;
-            }
-
-            registerBlock.style.display = 'none';
-            loginBlock.style.display = 'block';
          }
       </script>
 

@@ -15,8 +15,7 @@ def handle_login(mysql):
         if user:
             # Verify the password
             hashed_password = hashlib.sha256(password.encode()).hexdigest()
-            user_password = hashlib.sha256(user[1].encode()).hexdigest()
-            if hashed_password == user_password:  # Access the password hash by index
+            if hashed_password == user[1]:  # Access the password hash by index
                 # Password is correct, set the session username
                 session["username"] = username
                 return redirect(url_for('home'))
