@@ -26,14 +26,19 @@ def fuelQuote(mysql):
       # cur.execute("SELECT * FROM users WHERE username = %s", (username,))
       # user = cur.fetchone()
 
-      # Get address from profile
-      cur.execute("SELECT address1, city, states from users WHERE username = %s", (username,))
-      fetchValues = cur.fetchone()
-      if fetchValues:
-         address = fetchValues[0]
-         city = fetchValues[1]
-         state = fetchValues[2]
-         deliveryAddress  = f"{address} - {city} - {state}"
+   # Get address from profile
+   cur.execute("SELECT address1, city, states, zip from users WHERE username = %s", (username,))
+   fetchValues = cur.fetchone()
+   if fetchValues:
+      address = fetchValues[0]
+      city = fetchValues[1]
+      state = fetchValues[2]
+      zipCode = fetchValues[3]
+      dAddress  = f"{address} - {city} - {state} - {zipCode}"
+   else:
+      dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
+
+   if request.method == 'POST':
 
       # Receive input from quote  page
       gallon = float(request.form["gallonsRequested"])
@@ -41,6 +46,7 @@ def fuelQuote(mysql):
       pricingModule = FuelPricing()
       suggested_price, total_price = pricingModule.calculatingPrice(gallon, state)
 
+      # Return the value to display quote
       # Return the value to display quote
       if 'displayData' in request.form:
          return jsonify(suggested_price = suggested_price, total_price = total_price)
