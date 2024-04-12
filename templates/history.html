@@ -24,11 +24,11 @@
           <tbody>
               {% for quote in quote_history %}
               <tr>
-                  <td>{{ quote.delivery_date }}</td>
-                  <td>{{ quote.gallon_requested }}</td>
-                  <td>{{ quote.delivery_address }}</td>
-                  <td>{{ quote.suggested_price }}</td>
-                  <td>{{ quote.total_price }}</td>
+                  <td>{{ quote[2] }}</td>
+                  <td>{{ quote[3] }}</td>
+                  <td>{{ quote[4] }}</td>
+                  <td>{{ quote[5] }}</td>
+                  <td>{{ quote[6] }}</td>
               </tr>
               {% endfor %}
           </tbody>
