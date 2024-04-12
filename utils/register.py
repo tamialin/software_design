@@ -1,5 +1,5 @@
 from flask import request, render_template
-import time
+import time, hashlib
 
 def register_user(mysql):
     username = request.form['username']
@@ -15,8 +15,10 @@ def register_user(mysql):
         time.sleep(3)
         return render_template('register.html', message=message)
     
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    
     # Insert new user into the database
-    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+    cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_password))
     mysql.connection.commit()
     cur.close()
     
