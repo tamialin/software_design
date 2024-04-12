@@ -5,6 +5,7 @@ from utils.temp_db import users_db
 
 
 def fuelQuote():
+   print(session.get("username") )
    if request.method == 'POST':
       gallon = float(request.form["gallonsRequested"])
       delivery_date = request.form["deliveryDate"] 
