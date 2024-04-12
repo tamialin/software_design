@@ -11,7 +11,7 @@ from utils.register import register_user
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'tamialin'
+app.config['MYSQL_PASSWORD'] = 'Vietnam2862000.'
 app.config['MYSQL_DB'] = 'our_users'
 
 app.config["SESSION_PERMANENT"] = False
@@ -32,7 +32,7 @@ def about():
 def quote():
     if not session.get("username"):
         return redirect("/login")
-    return fuelQuote()
+    return fuelQuote(mysql)
     # return render_template('quote.html')
 
 @app.route('/history')
