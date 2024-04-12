@@ -20,18 +20,18 @@
                 <input type="number" id="gallonsRequested" name="gallonsRequested" step="0.1" min="0" required>
 
                 <label for="deliveryAddress">Delivery Address:</label>
-                <input type="text" id="deliveryAddress" name="deliveryAddress" readonly value="123 Main St, Cityville">
+                <input type="text" id="deliveryAddress" name="deliveryAddress" readonly value= "{{ deliveryAddress }}">
 
                 <label for="deliveryDate">Delivery Date:</label>
                 <input type="date" id="deliveryDate" name="deliveryDate" required>
 
                 <!-- Button to request a quote-->
-                <button type="submit" name="getQuote">Get Quote</button>
+                <button type="submit" id="getQuote" name="getQuote">Get Quote</button>
 
                 <div id="quoteResults"></div>
 
                 <!-- Button to submit quote -->
-                <button type="submit" id="submitBtn" name="submitBtn" style="display:none;">Submit</button>
+                <button type="submit" id="submitBtn" name="submitBtn" style="display: none;">Submit</button>
             </form>
 
         </div>
@@ -45,21 +45,23 @@
         $(document).ready(function() {
             $('#quoteForm').on('submit', function(event) {
                 event.preventDefault();
-                sendData();
+                const quoteInput = $(this).serialize();
+
+                if (event.originalEvent.submitter.id === 'getQuote') {
+                    displayData(quoteInput);
+                } else if (event.originalEvent.submitter.id === 'submitBtn') {
+                    sendData(quoteInput)
+                }
             });
 
-            function sendData() {
-                const gallon = $('#gallonsRequested').val();
-                const deliveryDate = $('#deliveryDate').val();
+            function displayData(quoteInput) {
+                // const gallon = $('#gallonsRequested').val();
+                // const deliveryDate = $('#deliveryDate').val();
 
                 $.ajax({
                     url: '/quote',
                     method : 'POST',
-                    data : {
-                        'action' : 'get_quote',
-                        gallonsRequested : gallon,
-                        deliveryDate: deliveryDate
-                    },
+                    data: quoteInput + '&displayData=true',
                     success: function(data) {
                         $('#quoteResults').html(`
                             <label>Suggested Price Per Gallon:</label>
@@ -73,6 +75,22 @@
                     }
                 });
                 document.getElementById('submitBtn').style.display = 'block';
+            }
+
+            function sendData(quoteInput) {
+                $.ajax({
+                    url: '/quote',
+                    method: 'POST',
+                    data: quoteInput + '&sendData=true', // Add a parameter to differentiate
+                    success: function(data) {
+                        $('#quoteResults').html(`
+                            <p>Data successfully sent</p>
+                        `)
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
             }
         });
 
