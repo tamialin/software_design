@@ -125,3 +125,23 @@ button:hover {
 #submitBtn {
     margin-top: 20px;
 }
+
+.afterQuote {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff6d;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0);
+}
+
+.afterQuote button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
