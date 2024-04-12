@@ -129,3 +129,17 @@ button:hover{
    margin: 5%;
    font-size: 15px;
 }
+
+.error-message {
+   color: red;
+   font-size: 16px;
+   text-align: center;
+   margin-top: 15px;
+}
+
+.success-message {
+   color: green;
+   font-size: 16px;
+   text-align: center;
+   margin-top: 15px;
+}
