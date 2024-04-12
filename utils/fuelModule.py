@@ -4,7 +4,7 @@ from utils.history import update_quote_history
 from utils.temp_db import users_db
 
 
-def fuelQuote(mysql):
+def fuelQuote():
    if request.method == 'POST':
       username = session.get("username") 
       
