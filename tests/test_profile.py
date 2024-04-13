@@ -26,6 +26,16 @@ def test_default_profile_values(client):
         response = client.get('/profile')
         assert response.status_code == 200
 
+        response = client.post('/profile', data={
+            'fullname': 'Updated Name',
+            'address1': 'Updated Address1', 
+            'address2': 'Updated Address2', 
+            'city': 'Updated City', 
+            'states': 'Updated State', 
+            'zip': 'Updated Zipcode'
+            }, follow_redirects=True)
+        assert response.status_code == 200
+
         # Check if default values are displayed in the form
         assert b'value="John Doe"' in response.data
         assert b'value="1314 Shadowbrook St"' in response.data
