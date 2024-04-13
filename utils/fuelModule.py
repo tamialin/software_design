@@ -16,7 +16,7 @@ def fuelQuote(mysql):
       state = fetchValues[2]
       zipCode = fetchValues[3]
       dAddress  = f"{address} - {city} - {state} - {zipCode}"
-   else:
+   else: 
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
 
    if request.method == 'POST':
@@ -34,9 +34,10 @@ def fuelQuote(mysql):
       city = fetchValues[1]
       state = fetchValues[2]
       zipCode = fetchValues[3]
-      dAddress  = f"{address} - {city} - {state} - {zipCode}"
-   else:
-      dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
+      if address is None or city is None or state is None or zipCode is None:
+         dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
+      else:
+         dAddress  = f"{address} - {city} - {state} - {zipCode}"
 
    if request.method == 'POST':
 

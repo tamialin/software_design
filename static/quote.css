@@ -126,7 +126,7 @@ button:hover {
     margin-top: 20px;
 }
 
-.afterQuote {
+.popup {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -138,10 +138,36 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(0);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
 }
 
-.afterQuote button{
-    position: absolute;
+.popup .text {
+    padding: 20px;
+}
+
+.popup .button{
+    position: relative;
+    left: 40%;
+    background-color: #b60303;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.hero#blur.active {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+#popup.active {
     top: 50%;
-    left: 50%;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
 }
