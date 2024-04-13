@@ -13,13 +13,13 @@
          <form action="/register", method="POST" onsubmit="return registerAccount()">
             <div class="input-box">
                <label class="required">Email</label>
-               <input class="register-email" type="Text" placeholder="Email" name="username" required>
+               <input class="register-email" type="email" placeholder="Email" name="username" required>
             </div>
    
             <div class="input-box">
                <label class="required">Password</label>
                <div class="enter-pass">
-                  <input type="password" placeholder="Password" id="password" name="password" required>
+                  <input type="password" placeholder="Password" id="password" name="password" minlength="8" required>
                   <img src="../static/img/eye-icons/eye-close.png" id="eyeicon">
                </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="input-box">
                <label class="required">Re-enter Password</label>
                <div class="re-enter-pass">
-                  <input type="password" placeholder="Re-enter password" id="re-password" name="re-password" required>
+                  <input type="password" placeholder="Re-enter password" id="re-password" name="re-password" minlength="8" required>
                   <img src="../static/img/eye-icons/eye-close.png" id="re-eyeicon">
                </div>
             </div>
