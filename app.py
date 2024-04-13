@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, session, redirect, request
 from flask_session import Session
 from flask_mysqldb import MySQL
+from flask import jsonify
+
 
 from utils.auth import handle_login
 from utils.profileUpdate import profileU
@@ -47,15 +49,22 @@ def profile():
     if not session.get("username"):
         return redirect("/login")
     return profileU(mysql)
-    #return render_template('ProfileManage.html')
 
+
+# @app.route('/login', methods=['POST', 'GET'])
+# def login():
+#     if request.method == 'GET':
+#         return render_template('Login.html')
+#     if request.method == 'POST':
+#         return handle_login(mysql)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
         return render_template('Login.html')
-    if request.method == 'POST':
-        return handle_login(mysql)
+    elif request.method == 'POST':
+        # Call the handle_login function to process the login attempt
+        return handle_login(request.form)
 
 @app.route('/logout')
 def logout():
