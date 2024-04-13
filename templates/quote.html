@@ -12,7 +12,7 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    <section class="hero">
+    <section class="hero" id="blur">
         <h2>Make a Quote</h2> <!-- Form title outside the form -->
         <div class="quote-form-container">
             <form id="quoteForm" action="#" method="POST" onsubmit="return fuelPricing()">
@@ -31,15 +31,17 @@
                 <div id="quoteResults"></div>
 
                 <!-- Button to submit quote -->
-                <button type="submit" id="submitBtn" name="submitBtn" style="display: none;" onclick="blurPage()">Submit</button>
+                <button type="submit" id="submitBtn" name="submitBtn" style="display: none;" onclick="toggle()">Submit</button>
             </form>
-            <div class="afterQuote" id="afterQuote" style="display: none;">
-                <p>Data has been successfully sent!</p>
-                <p>You will be re-directed to History Page</p>
-                <button id="redirectBtn">OK</button>
-            </div>
         </div>
     </section>
+    <div class="popup" id="popup">
+        <div class="text">
+            <p>Data has been successfully sent!</p>
+            <p>You will be re-directed to History Page</p>
+        </div>
+        <a class="button" id="redirectBtn" href="{{url_for('history')}}">OK</a>
+    </div>
 
     <script>
         // Using AJAX to send gallonsRequested to the pricing.py,
@@ -101,12 +103,14 @@
         function fuelPricing() {
                 return True
         }
+    </script>
 
-        function blurPage() {
-            var body = document.body;
-            var clearDiv = document.querySelector('.afterQuote');
-            body.style.filter = 'blur(5px)'
-            clearDiv.style.display = 'block';
+    <script type="text/javascript">
+        function toggle() {
+            var blur = document.getElementById('blur');
+            blur.classList.toggle('active');
+            var popup = document.getElementById('popup');
+            popup.classList.toggle('active');
         }
     </script>
 </body>
