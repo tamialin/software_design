@@ -15,7 +15,7 @@ def fuelQuote(mysql):
       city = fetchValues[1]
       state = fetchValues[2]
       zipCode = fetchValues[3]
-      dAddress  = f"{address} - {city} - {state} - {zipCode}"
+      dAddress  = f"{address}, {city}, {state}, {zipCode}"
    else: 
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
 
