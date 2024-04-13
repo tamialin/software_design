@@ -6,38 +6,18 @@ from utils.temp_db import users_db
 def fuelQuote(mysql):
    username = session.get("username")
    cur = mysql.connection.cursor()
-   # dAddress = "This address"
+
+   #Get address from DB
    cur.execute("SELECT address1, city, states, zip from users WHERE username = %s", (username,))
    fetchValues = cur.fetchone()
-   
    if fetchValues:
       address = fetchValues[0]
       city = fetchValues[1]
       state = fetchValues[2]
       zipCode = fetchValues[3]
-      dAddress  = f"{address} - {city} - {state} - {zipCode}"
+      dAddress  = f"{address}, {city}, {state}, {zipCode}"
    else: 
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
-
-   if request.method == 'POST':
-
-      # Get username from DB
-      username = session.get("username")
-      # cur.execute("SELECT * FROM users WHERE username = %s", (username,))
-      # user = cur.fetchone()
-
-   # Get address from profile
-   cur.execute("SELECT address1, city, states, zip from users WHERE username = %s", (username,))
-   fetchValues = cur.fetchone()
-   if fetchValues:
-      address = fetchValues[0]
-      city = fetchValues[1]
-      state = fetchValues[2]
-      zipCode = fetchValues[3]
-      if address is None or city is None or state is None or zipCode is None:
-         dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
-      else:
-         dAddress  = f"{address} - {city} - {state} - {zipCode}"
 
    if request.method == 'POST':
 
