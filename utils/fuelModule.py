@@ -19,7 +19,6 @@ def fuelQuote(mysql):
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
 
    if request.method == 'POST':
-<<<<<<< HEAD
       # Get username from DB
       username = session.get("username")
 
@@ -36,9 +35,6 @@ def fuelQuote(mysql):
       dAddress = "Address Hasn't Not Been Set Up. Please Update Your Profile"
 
    if request.method == 'POST':
-=======
->>>>>>> main
-
       # Receive input from quote  page
       gallon = float(request.form["gallonsRequested"])
       date = request.form["deliveryDate"]
