@@ -51,12 +51,20 @@ def profile():
     return profileU(mysql)
 
 
+# @app.route('/login', methods=['POST', 'GET'])
+# def login():
+#     if request.method == 'GET':
+#         return render_template('Login.html')
+#     if request.method == 'POST':
+#         return handle_login(mysql)
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
         return render_template('Login.html')
-    if request.method == 'POST':
-        return handle_login(mysql)
+    elif request.method == 'POST':
+        # Call the handle_login function to process the login attempt
+        return handle_login(request.form)
 
 @app.route('/logout')
 def logout():
