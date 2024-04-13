@@ -1,6 +1,7 @@
 from flask import request, redirect, url_for, render_template, session
 import hashlib
 
+
 def handle_login(mysql):
     if request.method == 'POST':
         username = request.form['username']
