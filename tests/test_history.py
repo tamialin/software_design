@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from flask import session
 from app import app
 from utils.pricing import FuelPricing
-from utils.history import update_quote_history, get_quote_history
+from utils.history import get_quote_history
 from utils.temp_db import quote_history_db
 
 @pytest.fixture
@@ -42,36 +42,17 @@ def test_quote_form_submission(client):
     assert quote_data['gallon_requested'] == 100
     assert quote_data['delivery_date'] == '2024-04-01'
 
-def test_update_quote_history():
-    username = 'user2'
-    quote_data = {
-        'delivery_date': '2024-04-01',
-        'gallon_requested': 100,
-        'delivery_address': 'Test Address',
-        'suggested_price': 1.5,
-        'total_price': 150
-    }
+def test_get_quote_history(mocker):
+    mock_cursor = mocker.Mock()
+    mock_cursor.fetchall.return_value = [
+        (1, 'username', '2023-01-01', 100, '123 Main St', 1.23, 123.45),
+        (2, 'username', '2023-02-01', 200, '456 Elm St', 2.34, 234.56)
+    ]
+    mock_mysql = mocker.Mock()
+    mock_mysql.connection.cursor.return_value = mock_cursor
+    quote_history = get_quote_history('username', mock_mysql)
 
-    # Add quote data
-    update_quote_history(username, quote_data)
-    assert username in quote_history_db
-    assert len(quote_history_db[username]) == 1
-    assert quote_history_db[username][0] == quote_data
-
-def test_get_quote_history():
-    username = 'user2'
-    quote_data = {
-        'delivery_date': '2024-04-01',
-        'gallon_requested': 100,
-        'delivery_address': 'Test Address',
-        'suggested_price': 1.5,
-        'total_price': 150
-    }
-
-    # Add quote data
-    quote_history_db[username] = [quote_data]
-
-    history = get_quote_history(username)
-    assert isinstance(history, list)
-    assert len(history) == 1
-    assert history[0] == quote_data
+    assert quote_history == [
+        (1, 'username', '2023-01-01', 100, '123 Main St', 1.23, 123.45),
+        (2, 'username', '2023-02-01', 200, '456 Elm St', 2.34, 234.56)
+    ]
