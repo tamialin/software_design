@@ -16,18 +16,18 @@ def client():
 
 def test_fuel_pricing1():
     fuel_pricing = FuelPricing()
-    suggested_price, total_price = fuel_pricing.calculatingPrice(100)
+    suggested_price, total_price = fuel_pricing.calculatingPrice(100, 'Texas')
     assert suggested_price == 0.26  # Assuming calculations are correct
     assert total_price == 26.0  # Assuming calculations are correct
 
 def test_fuel_pricing2():
     fuel_pricing = FuelPricing()
-    suggested_price, total_price = fuel_pricing.calculatingPrice(1500)
+    suggested_price, total_price = fuel_pricing.calculatingPrice(1500, "Texas")
     assert suggested_price == 0.24  # Assuming calculations are correct
     assert total_price == 360.0
 
 def test_fuel_pricing_return_customer():
     fuel_pricing = FuelPricing()
-    suggested_price, total_price = fuel_pricing.calculatingPrice(100, return_customer=True)
+    suggested_price, total_price = fuel_pricing.calculatingPrice(100, "Texas", return_customer=True,)
     assert suggested_price == 0.24  # Assuming calculations are correct with return customer
     assert total_price == 24  # Assuming calculations are correct with return customer
