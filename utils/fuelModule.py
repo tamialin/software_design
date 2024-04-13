@@ -47,7 +47,6 @@ def fuelQuote(mysql):
       suggested_price, total_price = pricingModule.calculatingPrice(gallon, state)
 
       # Return the value to display quote
-      # Return the value to display quote
       if 'displayData' in request.form:
          return jsonify(suggested_price = suggested_price, total_price = total_price)
       elif 'sendData' in request.form: # send user input and prices to history backend
