@@ -10,10 +10,10 @@ from utils.fuelModule import fuelQuote
 from utils.history import get_quote_history
 from utils.register import register_user
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Vietnam2862000.'
+app.config['MYSQL_PASSWORD'] = 'LP1997Win100%'
 app.config['MYSQL_DB'] = 'our_users'
 
 app.config["SESSION_PERMANENT"] = False
@@ -54,7 +54,7 @@ def profile():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
-        return render_template('Login.html')
+        return render_template('/Login.html')
     if request.method == 'POST':
         return handle_login(mysql)
 
