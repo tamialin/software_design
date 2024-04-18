@@ -26,7 +26,7 @@
                 <input type="date" id="deliveryDate" name="deliveryDate" required>
 
                 <!-- Button to request a quote-->
-                <button type="submit" id="getQuote" name="getQuote">Get Quote</button>
+                <button type="submit" id="getQuote" name="getQuote" style="display: none;">Get Quote</button>
 
                 <div id="quoteResults"></div>
 
@@ -44,15 +44,16 @@
     </div>
 
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     // Get the value of the received string from the hidden input
-        //     var receivedString = document.getElementById('deliveryAddress');
+        // Hide the getQuote button if profile has not been updated.
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the value of the received string from the hidden input
+            var receivedString = document.getElementById('deliveryAddress').value;
 
-        //     // Check if the received string matches the specified line
-        //     if (receivedString !== "Address Hasn't Been Set Up. Please Update Your Profile") {
-        //         document.getElementById('getQuote').style.display = 'block';
-        //     }
-        // });
+            // Check if the received string matches the specified line
+            if (receivedString.trim() !== "Address Hasn't Been Set Up. Please Update Your Profile") {
+                document.getElementById('getQuote').style.display = 'block';
+            }
+        });
 
         // Using AJAX to send gallonsRequested to the pricing.py,
         // then receive the suggested price and total price, send it
