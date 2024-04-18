@@ -2,58 +2,24 @@
 import os
 import sys
 import pytest
+from unittest.mock import MagicMock, patch, Mock
+import hashlib
 
 # Add the parent directory to the system path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-import pytest
-from unittest.mock import Mock, patch
-from flask import session
-
-# Import the function to be tested
+from app import app
 from utils.auth import handle_login
+from flask import session, redirect, url_for, render_template
 
-# Define a fixture for the Flask app
-@pytest.fixture
-def app():
-    from flask import Flask
-    app = Flask(__name__, template_folder='templates')
-    return app
 
-# Define a mock MySQL connection object
-@pytest.fixture
-def mysql():
-    return Mock()
+# @pytest.fixture
+# def app():
+#     from flask import Flask
+#     app = Flask(__name__)
+#     return app
 
-def test_handle_login_valid(mysql, app):
-    # Mock MySQL cursor object
-    cursor_mock = mysql.connection.cursor.return_value
-    # Mock the execute method of the cursor object
-    cursor_mock.fetchone.return_value = ('test_user', 'hashed_password')
-
-    # Mock Flask request context
-    with app.test_request_context('/login.html', method='POST', data={'username': 'test_user', 'password': 'test_password'}):
-        # Call the handle_login function
-        with patch('utils.auth.redirect', side_effect=lambda url: url) as redirect_mock:
-            result = handle_login(mysql)
-            assert session['username'] == 'test_user'
-            assert result == '/home'  # Assuming redirect to home page
-
-            # Assert that the redirect function was called with the correct URL
-            redirect_mock.assert_called_once_with('/home')
-
-def test_handle_login_invalid(mysql, app):
-    # Mock MySQL cursor object
-    cursor_mock = mysql.connection.cursor.return_value
-    # Mock the execute method of the cursor object
-    cursor_mock.fetchone.return_value = None
-
-    # Mock Flask request context
-    with app.test_request_context('/login', method='POST', data={'username': 'test_user', 'password': 'test_password'}):
-        # Call the handle_login function
-        result = handle_login(mysql)
-        assert 'username' not in session
-        assert 'Invalid username or password' in result  # Assuming rendering login page with error message
+# def test_handle_login(mysql):
+#     pass
 
 
 # def test_login_success1(client):
@@ -76,3 +42,86 @@ def test_handle_login_invalid(mysql, app):
 #     assert response.status_code == 200
 #     assert b"Invalid username or password. Please try again." in response.data
 
+# @pytest.fixture
+# def mysql():
+#     return mock.Mock()
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
+
+@pytest.fixture
+def mysql():
+    # Mock the MySQL connection
+    with patch('app.mysql') as mysql_mock:
+        # Mock the connection.cursor() method
+        cursor_mock = mysql_mock.connection.cursor.return_value
+        # Mock the cursor.fetchone() method to return a sample user data
+        cursor_mock.fetchone.return_value = ('test_user', 'hashed_password')
+        yield mysql_mock       
+
+# Test case for handle_login function
+def test_handle_login_success(client, mysql):
+    # Mock form data for a valid login attempt
+    form_data_valid = {
+    'username': 'test_user',
+    'password': 'test_password',
+    'fullname': 'Test User',
+    'address1': '123 Main St',
+    'address2': '',
+    'city': 'Example City',
+    'states': 'CA',
+    'zip': '12345'
+}
+    # Mock the MySQL cursor and execute method to simulate a successful authentication
+    cursor_mock = mysql.connection.cursor.return_value
+    cursor_mock.fetchone.return_value = ('test_user', hashlib.sha256('test_password'.encode()).hexdigest())
+
+    # Send a POST request with valid form data to the login endpoint
+    response = client.post('/login', data=form_data_valid, follow_redirects=True)
+    print(response.headers)
+
+    # Ensure that the request was successful and redirected to the home page
+    assert response.status_code == 200  # Assuming a successful login
+    assert session.get("username") == 'test_user'  # Ensure session username is set to the correct value
+    assert b'<title>FUEL QUOTE</title>' in response.data
+    #assert response.location == url_for('home')
+    
+
+def test_handle_login_failure0(client, mysql):
+    # Mock form data for an invalid login attempt
+    form_data_invalid = {
+        'username': 'invalid_user',
+        'password': 'invalid_password'
+    }
+
+    # Mock the MySQL cursor and execute method to simulate no user found
+    cursor_mock = mysql.connection.cursor.return_value
+    cursor_mock.fetchone.return_value = None
+
+    # Send a POST request with invalid form data to the login endpoint
+    response = client.post('/login', data=form_data_invalid, follow_redirects=True)
+
+    # Ensure that the request was unsuccessful and the login page is rendered again
+    assert response.status_code == 200  # Assuming a failed login
+    assert b"Invalid username or password. Please try again." in response.data
+    assert b"Login" in response.data  # Assuming 'Login' text is present in the login page
+
+def test_handle_login_failure1(client, mysql):
+    # Mock form data for an invalid login attempt
+    form_data_invalid = {
+        'username': 'test_user',
+        'password': 'invalid_password'
+    }
+
+    # Mock the MySQL cursor and execute method to simulate no user found
+    cursor_mock = mysql.connection.cursor.return_value
+    cursor_mock.fetchone.return_value = ('test_user', hashlib.sha256('test_password'.encode()).hexdigest())
+
+    # Send a POST request with invalid form data to the login endpoint
+    response = client.post('/login', data=form_data_invalid, follow_redirects=True)
+
+    # Ensure that the request was unsuccessful and the login page is rendered again
+    assert response.status_code == 200  # Assuming a failed login
+    assert b"Invalid username or password. Please try again." in response.data
+    assert b"Login" in response.data  # Assuming 'Login' text is present in the login page
