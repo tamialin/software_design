@@ -10,8 +10,10 @@
 <body>
   {% include 'navbar.html' %}
   <section class="hero"></section>  
-
   <section class="history-table">
+    <div class="table-title">
+        <h1>Pricing History</h1>
+    </div>
       <table>
           <thead>
                 <tr>
@@ -27,7 +29,7 @@
               <tr>
                   <td>{{ quote[2] }}</td>
                   <td>{{ quote[3] }}</td>
-                  <td>{{ quote[4] }}</td>
+                  <td>{{ quote[4] }}, {{ quote[7] }}, {{ quote[8] }}, {{ quote[9] }}</td>
                   <td>{{ quote[5] }}</td>
                   <td>{{ quote[6] }}</td>
               </tr>

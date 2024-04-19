@@ -63,10 +63,8 @@ def mysql(profile_user_data):
             profile_user_data['zip']
         )
         yield mysql_mock
-# # HOME ROUTES
-# def test_home_route(client):
-#     response = client.get('/')
-#     assert response.status_code == 200
+
+# home and about routes are not neccessary to be tested
         
 # HISTORY ROUTES
 def test_access_history_when_logged_in(client, logged_in_user, mysql):
