@@ -18,6 +18,7 @@ def fuelQuote(mysql):
    else: 
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
    returnUser = fetchValues[4]
+   print(state)
    
    # Receive input from quote page
 

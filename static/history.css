@@ -65,8 +65,7 @@ nav a.active {
     width: 90%;
     max-width: 1200px; /* Limit the width of the table */
     max-height: 500px;
-    /* overflow-x: auto;  */
-    /* Added for horizontal scrolling*/
+    overflow-x: auto; /* Added for horizontal scrolling*/
     overflow-y: auto; /*Scroll table*/
     border-collapse: collapse;
     z-index: 1; /* Ensure the table is above other elements */
