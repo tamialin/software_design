@@ -3,8 +3,6 @@
     margin:0;
     padding:0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    overflow: hidden;
-    /* don't let the userscroll down */
 }
 
 /* navigation tab adj */
@@ -60,16 +58,20 @@ nav a.active {
 }
 
 .history-table {
-    position: fixed; /* Position the table fixed to ensure it stays in place */
+    position: fixed; /*Position the table fixed to ensure it stays in place */
     top: 50%; /* Position it vertically in the middle of the viewport */
     left: 50%; /* Position it horizontally in the middle of the viewport */
     transform: translate(-50%, -50%); /* Center the table */
     width: 90%;
     max-width: 1200px; /* Limit the width of the table */
-    overflow-x: auto; /* Added for horizontal scrolling */
+    max-height: 500px;
+    /* overflow-x: auto;  */
+    /* Added for horizontal scrolling*/
+    overflow-y: auto; /*Scroll table*/
     border-collapse: collapse;
     z-index: 1; /* Ensure the table is above other elements */
     background-color: rgba(255, 255, 255, 0.2); /* Adjust the background color */
+    scroll-snap-type: y mandatory;
 }
 
 .history-table table {
@@ -87,3 +89,11 @@ nav a.active {
     background-color: #FFDEAD;
 }
 
+th {
+    position: sticky;
+    top: 0;
+}
+
+tr {
+    scroll-snap-align: start;
+}
