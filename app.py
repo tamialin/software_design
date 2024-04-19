@@ -24,7 +24,6 @@ mysql = MySQL(app)
 @app.route('/')
 def home():
     return render_template('home.html')
-    
 
 @app.route('/about')
 def about():
@@ -33,13 +32,13 @@ def about():
 @app.route('/quote', methods=["POST", "GET"])
 def quote():
     if not session.get("username"):
-        return redirect("/login")
+        return redirect(url_for('login', clickfrom='quote'))
     return fuelQuote(mysql)
 
 @app.route('/history')
 def history():
     if not session.get("username"):
-        return redirect("/login")
+        return redirect(url_for('login', clickfrom='history'))
     username = session.get('username') 
     quote_history = get_quote_history(username, mysql)
     return render_template('history.html', quote_history=quote_history)
@@ -47,16 +46,16 @@ def history():
 @app.route('/profile', methods=["POST", "GET"])
 def profile():
     if not session.get("username"):
-        return redirect("/login")
+        return redirect(url_for('login', clickfrom='profile'))
     return profileU(mysql)
 
-
-@app.route('/login', methods=['POST', 'GET'])
-def login():
+@app.route('/login', defaults={'clickfrom': None}, methods=['POST', 'GET'])
+@app.route('/login/<clickfrom>', methods=['POST', 'GET'])
+def login(clickfrom):
     if request.method == 'GET':
-        return render_template('Login.html')
+        return render_template('Login.html', clickfrom=clickfrom)
     if request.method == 'POST':
-        return handle_login(mysql)
+        return handle_login(mysql, clickfrom)
 
 
 @app.route('/logout')
