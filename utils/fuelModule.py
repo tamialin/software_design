@@ -15,10 +15,10 @@ def fuelQuote(mysql):
       state = fetchValues[2]
       zipCode = fetchValues[3]
       dAddress  = f"{address}, {city}, {state}, {zipCode}"
+      returnUser = fetchValues[4]
    else: 
       dAddress = "Address Hasn't Been Set Up. Please Update Your Profile"
-   returnUser = fetchValues[4]
-   print(state)
+   # print(state)
    
    # Receive input from quote page
 
