@@ -21,8 +21,8 @@ class FuelPricing:
             self.location_factor = 0.04
 
         # Calculating the price
-        margin = self.location_factor - self.history_factor + gallon_factor + self.company_profit
-        suggested_price = round(margin * self.current_price, 2)
+        margin = round((self.location_factor - self.history_factor + gallon_factor + self.company_profit) * self.current_price, 3)
+        suggested_price = round(margin + self.current_price, 3)
         total_price = round(float(gallon * suggested_price), 2)
 
         print(self.history_factor)
