@@ -83,6 +83,9 @@ nav a.active {
     border-bottom: 1px solid #ddd;
     margin: 0; /* Remove margin */
 }
+.history-table td:nth-child(3) {
+    width: 30%; /* Set width for the third column (address) */
+}
 
 .history-table th {
     background-color: #FFDEAD;
@@ -96,3 +99,15 @@ th {
 tr {
     scroll-snap-align: start;
 }
+.table-title {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: center; /* Center align the text */
+}
+
+.table-title h1 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
