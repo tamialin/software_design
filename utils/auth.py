@@ -18,7 +18,6 @@ def handle_login(mysql, clickfrom):
             if hashed_password == user[1]:  # Access the password hash by index
                 # Password is correct, set the session username
                 session["username"] = username
-                print(clickfrom)
                 if clickfrom:
                     return redirect(url_for(clickfrom))
                 else:
