@@ -16,12 +16,10 @@ def client():
     with app.test_client() as client:
         yield client
         
-@mock.patch('utils.register')
-def test_register_user(mocker):
+def test_register_user(client):
     # Mocking MySQL connection and cursor
     mock_mysql = Mock()
-    mock_cursor = mocker.Mock()
-    mock_mysql.connection.cursor.return_value = mock_cursor
+    mock_cursor = mock_mysql.connection.cursor.return_value
 
     # Mocking execute method of the cursor
     mock_cursor.fetchone.return_value = None  # No user with the same username exists
@@ -29,20 +27,16 @@ def test_register_user(mocker):
 
     # Mocking session object
     mock_session = {}
-    mocker.patch('utils.register.session', mock_session)
-
-    # Mocking form data
-    form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
-    with patch('utils.register.request.form', return_value="Testing"):
-        result = register_user()
-        yield result
+    with patch('utils.register.session', mock_session):
+        # Mocking form data
+        form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
+        with app.test_request_context('/', method='POST', data = form_data):
+        #with patch('utils.register.request.form', form_data):
+            result = register_user(mock_mysql)
     # mocker.patch('utils.register.request.form', form_data)
-        
-
-    # Calling the function
-    result = register_user(mock_mysql)
 
     # Asserting the expected behavior
+    #print(result)
     assert result == render_template('register.html', success_message='User registered successfully!')
     mock_cursor.execute.assert_called_once_with("INSERT INTO users (username, password) VALUES (%s, %s)", ('test_user', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'))  # Ensure password hashing is correct
     mock_mysql.connection.commit.assert_called_once()
@@ -51,3 +45,4 @@ def test_register_user(mocker):
     # Testing for existing username
     mock_cursor.fetchone.return_value = ('test_user', 'hashed_password')  # Mocking an existing user
     result = register_user(mock_mysql)
+    assert result == render_template('register.html', error_message='Username already exists.')
