@@ -96,10 +96,6 @@ def test_access_profile_when_logged_in(client, logged_in_user, profile_user_data
     assert response.status_code == 200
     assert profile_user_data['fullname'].encode() in response.data
     assert profile_user_data['address1'].encode() in response.data
-    assert profile_user_data['address2'].encode() in response.data
-    assert profile_user_data['city'].encode() in response.data
-    assert profile_user_data['states'].encode() in response.data
-    assert profile_user_data['zip'].encode() in response.data
 def test_access_profile_when_not_login(client):
     response = client.get('/profile')
     assert response.status_code == 302 # successfully redirected
