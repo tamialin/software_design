@@ -16,38 +16,68 @@ def client():
     with app.test_client() as client:
         yield client
         
-@mock.patch('utils.register')
-def test_register_user(mocker):
-    # Mocking MySQL connection and cursor
+def test_register_user(client):
     mock_mysql = Mock()
-    mock_cursor = mocker.Mock()
-    mock_mysql.connection.cursor.return_value = mock_cursor
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    mock_cursor.fetchone.return_value = None 
 
-    # Mocking execute method of the cursor
-    mock_cursor.fetchone.return_value = None  # No user with the same username exists
-    mock_cursor.fetchall.return_value = None  # Mocking an empty result for select query
-
-    # Mocking session object
     mock_session = {}
-    mocker.patch('utils.register.session', mock_session)
+    with patch('utils.register.session', mock_session):
+        form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
+        with app.test_request_context('/', method='POST', data = form_data):
+            result = register_user(mock_mysql)
+            assert 'User registered successfully!' in result
+            assert mock_cursor.execute.called
+            assert mock_mysql.connection.commit.called
+            assert mock_cursor.close.called
+            assert mock_session['username'] == 'test_user'
 
-    # Mocking form data
-    form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
-    with patch('utils.register.request.form', return_value="Testing"):
-        result = register_user()
-        yield result
-    # mocker.patch('utils.register.request.form', form_data)
-        
+def test_username_already_exists(client):
+    mock_mysql = Mock()
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    mock_cursor.fetchone.return_value = ('test_user', 'hashed_password')
 
-    # Calling the function
-    result = register_user(mock_mysql)
+    mock_session = {}
+    with patch('utils.register.session', mock_session):
+        form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
+        with app.test_request_context('/', method='POST', data=form_data):
+            result = register_user(mock_mysql)
+            assert 'Username already exists.' in result
 
-    # Asserting the expected behavior
-    assert result == render_template('register.html', success_message='User registered successfully!')
-    mock_cursor.execute.assert_called_once_with("INSERT INTO users (username, password) VALUES (%s, %s)", ('test_user', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'))  # Ensure password hashing is correct
-    mock_mysql.connection.commit.assert_called_once()
-    mock_cursor.close.assert_called_once()
+def test_password_mismatch(client):
+    mock_mysql = Mock()
+    form_data = {'username': 'test_user', 'password': 'password', 're-password': 'different_password'}
+    with app.test_request_context('/', method='POST', data=form_data):
+        result = register_user(mock_mysql)
+        assert 'Password and Re-enter Password must be the same' in result
 
-    # Testing for existing username
-    mock_cursor.fetchone.return_value = ('test_user', 'hashed_password')  # Mocking an existing user
-    result = register_user(mock_mysql)
+def test_database_commit_failure(client):
+    mock_mysql = Mock()
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    mock_cursor.execute.side_effect = Exception("Database commit failed")
+
+    with pytest.raises(Exception) as e:
+        form_data = {'username': 'test_user', 'password': 'password', 're-password': 'password'}
+        with app.test_request_context('/', method='POST', data=form_data):
+            register_user(mock_mysql)
+    
+    assert str(e.value) == "Database commit failed"
+
+def test_edge_cases_username_password(client):
+    mock_mysql = Mock()
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    mock_cursor.fetchone.return_value = None
+
+    test_cases = [
+        {'username': '', 'password': 'password', 're-password': 'password'},  # Empty username
+        {'username': 'test_user!', 'password': 'password', 're-password': 'password'},  # Username with special characters
+        {'username': 'test_user', 'password': 'password!', 're-password': 'password!'},  # Password with special characters
+    ]
+
+    for form_data in test_cases:
+        with app.test_request_context('/', method='POST', data=form_data):
+            result = register_user(mock_mysql)
+            assert 'User registered successfully!' in result
+            assert mock_cursor.execute.called
+            assert mock_mysql.connection.commit.called
+            assert mock_cursor.close.called
