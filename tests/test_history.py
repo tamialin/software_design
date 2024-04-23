@@ -3,19 +3,14 @@ import json
 import os
 import sys
 import pytest
+from unittest.mock import Mock, patch
 
 # Add the parent directory to the system path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flask import Response, session
 from app import app
-from utils.pricing import FuelPricing
 from utils.history import get_quote_history
-from utils.temp_db import quote_history_db
-from utils.fuelModule import fuelQuote, sendToDB
-from unittest.mock import MagicMock
-from unittest.mock import Mock, patch
-
+from utils.fuelModule import fuelQuote
 
 @pytest.fixture
 def client():
@@ -129,7 +124,9 @@ def test_get_quote_history(mocker):
 
 def test_get_quote():
     mock_mysql = Mock()
+    # Mocking the cursor directly
     mock_cursor = mock_mysql.connection.cursor.return_value
+    # Ensuring mock_cursor is returned when cursor() is called
     mock_cursor.fetchone.return_value = ['1314 Shadowbrook St', 'Houston', 'WA', '11111', True]
 
     mock_session = {'username': 'test_user'}
@@ -144,9 +141,8 @@ def test_get_quote():
             
 def test_submit():
     mock_mysql = Mock()
-    mock_cursor = Mock()  # Mocking the cursor directly
-    mock_mysql.connection.cursor.return_value = mock_cursor  # Ensuring mock_cursor is returned when cursor() is called
-
+    mock_cursor = Mock()
+    mock_mysql.connection.cursor.return_value = mock_cursor
     mock_cursor.fetchone.return_value = ['1314 Shadowbrook St', 'Houston', 'WA', '11111', True]
 
     mock_session = {'username': 'test_user'}
