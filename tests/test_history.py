@@ -11,6 +11,9 @@ from app import app
 from utils.pricing import FuelPricing
 from utils.history import get_quote_history
 from utils.temp_db import quote_history_db
+from utils.fuelModule import fuelQuote, sendToDB
+from unittest.mock import MagicMock
+from unittest.mock import Mock, patch
 
 
 @pytest.fixture
@@ -93,3 +96,47 @@ def test_get_quote_history(mocker):
         (1, 'username', '2023-01-01', 100, '123 Main St', 1.23, 123.45),
         (2, 'username', '2023-02-01', 200, '456 Elm St', 2.34, 234.56)
     ]
+
+# def test_send_to_db(client, mocker):
+#     # Mock MySQL connection and cursor
+#     mock_cursor = MagicMock()
+#     mock_connection = MagicMock()
+#     mock_connection.cursor.return_value = mock_cursor
+#     mock_mysql = MagicMock()
+#     mock_mysql.connection = mock_connection
+
+#     with client.session_transaction() as sess:
+#         sess['username'] = 'test_user@gmail'
+        
+#     mock_cursor.fetchone.return_value = ('test_user@gmail',)
+        
+#     # # Mock session username
+#     # mocker.patch('flask.session.get').return_value = 'test_user@gmail'
+
+#     # Call the function
+#     sendToDB(mock_mysql, 'test_user@gmail', '2024-04-01', 100, '123 Main St', 1.5, 150)
+
+#     # Assert that the correct SQL queries are executed with the correct parameters
+#     mock_cursor.execute.assert_any_call(
+#         "SELECT * FROM users WHERE username = %s", ('test_user@gmail',)
+#     )
+#     mock_cursor.execute.assert_any_call(
+#         "INSERT INTO quote_history (username, date, gallon, address, price, total) VALUES (%s, %s, %s, %s, %s, %s)",
+#         ('test_user@gmail', '2024-04-01', 100, '123 Main St', 1.5, 150)
+#     )
+#     mock_connection.commit.assert_called_once()
+
+def test_submit():
+    # Mock MySQL connection and cursor
+    mock_mysql = Mock()
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    mock_cursor.fetchone.return_value = ['1314 Shadowbrook St', 'Houston', 'TX', '11111', True]
+    
+    mock_session = {'username': 'test_user'}
+    with patch('utils.fuelModule.session', mock_session):
+        form_data = {'gallonsRequested': '100', 'deliveryDate': '2024-04-18'}
+        with app.test_request_context('/quote', method='POST', data = form_data):
+            result = fuelQuote(mock_mysql)
+            assert 'Suggested Price Per Gallon:' in result
+            assert 'Total Amount:' in result
+            assert mock_session['username'] == 'test_user'
