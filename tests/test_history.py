@@ -2,16 +2,14 @@
 import os
 import sys
 import pytest
+from unittest.mock import Mock, patch
 
 # Add the parent directory to the system path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flask import session
 from app import app
-from utils.pricing import FuelPricing
 from utils.history import get_quote_history
-from utils.temp_db import quote_history_db
-
+from utils.fuelModule import fuelQuote
 
 @pytest.fixture
 def client():
@@ -93,3 +91,36 @@ def test_get_quote_history(mocker):
         (1, 'username', '2023-01-01', 100, '123 Main St', 1.23, 123.45),
         (2, 'username', '2023-02-01', 200, '456 Elm St', 2.34, 234.56)
     ]
+
+def test_get_quote():
+    mock_mysql = Mock()
+    # Mocking the cursor directly
+    mock_cursor = mock_mysql.connection.cursor.return_value
+    # Ensuring mock_cursor is returned when cursor() is called
+    mock_cursor.fetchone.return_value = ['1314 Shadowbrook St', 'Houston', 'WA', '11111', True]
+
+    mock_session = {'username': 'test_user'}
+    with patch('utils.fuelModule.session', mock_session):
+        form_data = {'gallonsRequested': '100', 'deliveryDate': '2024-04-18', 'displayData': 'true'}
+        with app.test_request_context('/quote', method='POST', data = form_data):
+            result = fuelQuote(mock_mysql)
+            data = result.get_json()
+            assert 'suggested_price' in data
+            assert 'total_price' in data
+            assert mock_session['username'] == 'test_user'
+            
+def test_submit():
+    mock_mysql = Mock()
+    mock_cursor = Mock()
+    mock_mysql.connection.cursor.return_value = mock_cursor
+    mock_cursor.fetchone.return_value = ['1314 Shadowbrook St', 'Houston', 'WA', '11111', True]
+
+    mock_session = {'username': 'test_user'}
+    with patch('utils.fuelModule.session', mock_session):
+        form_data = {'gallonsRequested': '100', 'deliveryDate': '2024-04-18', 'sendData': 'true'}
+        with app.test_request_context('/quote', method='POST', data=form_data):
+            result = fuelQuote(mock_mysql)
+            data = result.get_json()
+            assert 'success' in data
+            assert data['success']
+            assert mock_session['username'] == 'test_user'

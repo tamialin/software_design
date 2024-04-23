@@ -31,3 +31,9 @@ def test_fuel_pricing_return_customer():
     suggested_price, total_price = fuel_pricing.calculatingPrice(100, "TX", 1)
     assert suggested_price == 1.71 # Assuming calculations are correct with return customer
     assert total_price == 171  # Assuming calculations are correct with return customer
+
+def test_fuel_pricing_notTX():
+    fuel_pricing = FuelPricing()
+    suggested_price, total_price = fuel_pricing.calculatingPrice(3000, "WA", 1)
+    assert suggested_price == 1.725
+    assert total_price == 5175
