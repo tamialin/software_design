@@ -24,7 +24,7 @@
                 <input type="text" id="deliveryAddress" name="deliveryAddress" readonly value= "{{ dAddress }}">
 
                 <label for="deliveryDate">Delivery Date:</label>
-                <input type="date" id="deliveryDate" name="deliveryDate" required>
+                <input type="date" id="deliveryDate" name="deliveryDate" min="{{ today }}" required>
 
                 <!-- Button to request a quote-->
                 <button type="submit" id="getQuote" name="getQuote" style="display: none;">Get Quote</button>
@@ -43,6 +43,14 @@
         </div>
         <a class="button" id="redirectBtn" href="{{url_for('history')}}">OK</a>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get today's date and format it as YYYY-MM-DD
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById("deliveryDate").setAttribute("min", today);
+        });
+    </script>
 
     <script>
         // Hide the getQuote button if profile has not been updated.
