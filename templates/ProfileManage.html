@@ -19,7 +19,7 @@
 
             <div class="input-box">
                <label for="fullname" class="required">Full Name</label>
-               <input type="text" required maxlength="50" value="{{ user_data['fullname'] }}" name="fullname" id="fullname">
+               <input type="text" required pattern="[A-Za-z\s]+" maxlength="50" value="{{ user_data['fullname'] }}" name="fullname" id="fullname" title="Enter only English characters">
             </div>
 
             <div class="input-box">
